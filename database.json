@@ -139,6 +139,54 @@
             "article_1": "articles/json-formatter-guide-20260809171747195582.html",
             "article_2": "articles/json-formatter-tips-20260809171747195582.html",
             "date": "2026-08-09 17:17:47.195671"
+        },
+        {
+            "tool_slug": "color-palette",
+            "article_1": "articles/color-palette-guide-20260809211708963196.html",
+            "article_2": "articles/color-palette-tips-20260809211708963196.html",
+            "date": "2026-08-09 21:17:08.963349"
+        },
+        {
+            "tool_slug": "qr-code-gen",
+            "article_1": "articles/qr-code-gen-guide-20260809211708963364.html",
+            "article_2": "articles/qr-code-gen-tips-20260809211708963364.html",
+            "date": "2026-08-09 21:17:08.963485"
+        },
+        {
+            "tool_slug": "word-counter",
+            "article_1": "articles/word-counter-guide-20260809211708963500.html",
+            "article_2": "articles/word-counter-tips-20260809211708963500.html",
+            "date": "2026-08-09 21:17:08.963583"
+        },
+        {
+            "tool_slug": "timestamp-conv",
+            "article_1": "articles/timestamp-conv-guide-20260809211708963593.html",
+            "article_2": "articles/timestamp-conv-tips-20260809211708963593.html",
+            "date": "2026-08-09 21:17:08.963668"
+        },
+        {
+            "tool_slug": "box-shadow-gen",
+            "article_1": "articles/box-shadow-gen-guide-20260809211708963678.html",
+            "article_2": "articles/box-shadow-gen-tips-20260809211708963678.html",
+            "date": "2026-08-09 21:17:08.963751"
+        },
+        {
+            "tool_slug": "image-compressor",
+            "article_1": "articles/image-compressor-guide-20260809211708963760.html",
+            "article_2": "articles/image-compressor-tips-20260809211708963760.html",
+            "date": "2026-08-09 21:17:08.963832"
+        },
+        {
+            "tool_slug": "secure-pass-gen",
+            "article_1": "articles/secure-pass-gen-guide-20260809211708963841.html",
+            "article_2": "articles/secure-pass-gen-tips-20260809211708963841.html",
+            "date": "2026-08-09 21:17:08.963914"
+        },
+        {
+            "tool_slug": "base64-tool",
+            "article_1": "articles/base64-tool-guide-20260809211708963922.html",
+            "article_2": "articles/base64-tool-tips-20260809211708963922.html",
+            "date": "2026-08-09 21:17:08.963997"
         }
     ]
 }
