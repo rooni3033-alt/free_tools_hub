@@ -1,0 +1,66 @@
+{
+    "tools": [
+        {
+            "name": "Timestamp Converter",
+            "slug": "timestamp-conv",
+            "tool_url": "tools/timestamp-conv.html",
+            "date": "2026-08-09 15:54:35.954658"
+        },
+        {
+            "name": "CSS Box Shadow Generator",
+            "slug": "box-shadow-gen",
+            "tool_url": "tools/box-shadow-gen.html",
+            "date": "2026-08-09 15:54:35.954709"
+        },
+        {
+            "name": "QR Code Generator",
+            "slug": "qr-code-gen",
+            "tool_url": "tools/qr-code-gen.html",
+            "date": "2026-08-09 15:54:35.954754"
+        },
+        {
+            "name": "Password Generator",
+            "slug": "secure-pass-gen",
+            "tool_url": "tools/secure-pass-gen.html",
+            "date": "2026-08-09 15:54:35.954795"
+        },
+        {
+            "name": "JSON Formatter & Validator",
+            "slug": "json-formatter",
+            "tool_url": "tools/json-formatter.html",
+            "date": "2026-08-09 15:54:35.954836"
+        }
+    ],
+    "articles_history": [
+        {
+            "tool_slug": "json-formatter",
+            "article_1": "articles/json-formatter-guide-20260809155435954856.html",
+            "article_2": "articles/json-formatter-tips-20260809155435954856.html",
+            "date": "2026-08-09 15:54:35.954982"
+        },
+        {
+            "tool_slug": "qr-code-gen",
+            "article_1": "articles/qr-code-gen-guide-20260809155435954997.html",
+            "article_2": "articles/qr-code-gen-tips-20260809155435954997.html",
+            "date": "2026-08-09 15:54:35.955085"
+        },
+        {
+            "tool_slug": "timestamp-conv",
+            "article_1": "articles/timestamp-conv-guide-20260809155435955098.html",
+            "article_2": "articles/timestamp-conv-tips-20260809155435955098.html",
+            "date": "2026-08-09 15:54:35.955184"
+        },
+        {
+            "tool_slug": "secure-pass-gen",
+            "article_1": "articles/secure-pass-gen-guide-20260809155435955196.html",
+            "article_2": "articles/secure-pass-gen-tips-20260809155435955196.html",
+            "date": "2026-08-09 15:54:35.955279"
+        },
+        {
+            "tool_slug": "box-shadow-gen",
+            "article_1": "articles/box-shadow-gen-guide-20260809155435955292.html",
+            "article_2": "articles/box-shadow-gen-tips-20260809155435955292.html",
+            "date": "2026-08-09 15:54:35.955376"
+        }
+    ]
+}
