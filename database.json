@@ -325,6 +325,36 @@
             "article_1": "articles/word-counter-guide-20260810183659295987.html",
             "article_2": "articles/word-counter-tips-20260810183659295987.html",
             "date": "2026-08-10 18:36:59.296036"
+        },
+        {
+            "tool_slug": "word-counter",
+            "article_1": "articles/word-counter-guide-20260810220611246987.html",
+            "article_2": "articles/word-counter-tips-20260810220611246987.html",
+            "date": "2026-08-10 22:06:11.247141"
+        },
+        {
+            "tool_slug": "base64-tool",
+            "article_1": "articles/base64-tool-guide-20260810220611247159.html",
+            "article_2": "articles/base64-tool-tips-20260810220611247159.html",
+            "date": "2026-08-10 22:06:11.247266"
+        },
+        {
+            "tool_slug": "markdown-to-html",
+            "article_1": "articles/markdown-to-html-guide-20260810220611247280.html",
+            "article_2": "articles/markdown-to-html-tips-20260810220611247280.html",
+            "date": "2026-08-10 22:06:11.247381"
+        },
+        {
+            "tool_slug": "qr-code-gen",
+            "article_1": "articles/qr-code-gen-guide-20260810220611247394.html",
+            "article_2": "articles/qr-code-gen-tips-20260810220611247394.html",
+            "date": "2026-08-10 22:06:11.247495"
+        },
+        {
+            "tool_slug": "box-shadow-gen",
+            "article_1": "articles/box-shadow-gen-guide-20260810220611247508.html",
+            "article_2": "articles/box-shadow-gen-tips-20260810220611247508.html",
+            "date": "2026-08-10 22:06:11.247640"
         }
     ]
 }
