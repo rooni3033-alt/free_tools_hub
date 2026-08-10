@@ -187,6 +187,54 @@
             "article_1": "articles/base64-tool-guide-20260809211708963922.html",
             "article_2": "articles/base64-tool-tips-20260809211708963922.html",
             "date": "2026-08-09 21:17:08.963997"
+        },
+        {
+            "tool_slug": "box-shadow-gen",
+            "article_1": "articles/box-shadow-gen-guide-20260810051017807803.html",
+            "article_2": "articles/box-shadow-gen-tips-20260810051017807803.html",
+            "date": "2026-08-10 05:10:17.807891"
+        },
+        {
+            "tool_slug": "secure-pass-gen",
+            "article_1": "articles/secure-pass-gen-guide-20260810051017807906.html",
+            "article_2": "articles/secure-pass-gen-tips-20260810051017807906.html",
+            "date": "2026-08-10 05:10:17.807953"
+        },
+        {
+            "tool_slug": "timestamp-conv",
+            "article_1": "articles/timestamp-conv-guide-20260810051017807962.html",
+            "article_2": "articles/timestamp-conv-tips-20260810051017807962.html",
+            "date": "2026-08-10 05:10:17.808007"
+        },
+        {
+            "tool_slug": "word-counter",
+            "article_1": "articles/word-counter-guide-20260810051017808013.html",
+            "article_2": "articles/word-counter-tips-20260810051017808013.html",
+            "date": "2026-08-10 05:10:17.808045"
+        },
+        {
+            "tool_slug": "base64-tool",
+            "article_1": "articles/base64-tool-guide-20260810051017808051.html",
+            "article_2": "articles/base64-tool-tips-20260810051017808051.html",
+            "date": "2026-08-10 05:10:17.808081"
+        },
+        {
+            "tool_slug": "color-palette",
+            "article_1": "articles/color-palette-guide-20260810051017808086.html",
+            "article_2": "articles/color-palette-tips-20260810051017808086.html",
+            "date": "2026-08-10 05:10:17.808121"
+        },
+        {
+            "tool_slug": "markdown-to-html",
+            "article_1": "articles/markdown-to-html-guide-20260810051017808126.html",
+            "article_2": "articles/markdown-to-html-tips-20260810051017808126.html",
+            "date": "2026-08-10 05:10:17.808155"
+        },
+        {
+            "tool_slug": "json-formatter",
+            "article_1": "articles/json-formatter-guide-20260810051017808160.html",
+            "article_2": "articles/json-formatter-tips-20260810051017808160.html",
+            "date": "2026-08-10 05:10:17.808189"
         }
     ]
 }
