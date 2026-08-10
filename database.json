@@ -265,6 +265,36 @@
             "article_1": "articles/markdown-to-html-guide-20260810113120800925.html",
             "article_2": "articles/markdown-to-html-tips-20260810113120800925.html",
             "date": "2026-08-10 11:31:20.800956"
+        },
+        {
+            "tool_slug": "color-palette",
+            "article_1": "articles/color-palette-guide-20260810153203949226.html",
+            "article_2": "articles/color-palette-tips-20260810153203949226.html",
+            "date": "2026-08-10 15:32:03.949366"
+        },
+        {
+            "tool_slug": "qr-code-gen",
+            "article_1": "articles/qr-code-gen-guide-20260810153203949384.html",
+            "article_2": "articles/qr-code-gen-tips-20260810153203949384.html",
+            "date": "2026-08-10 15:32:03.949485"
+        },
+        {
+            "tool_slug": "word-counter",
+            "article_1": "articles/word-counter-guide-20260810153203949500.html",
+            "article_2": "articles/word-counter-tips-20260810153203949500.html",
+            "date": "2026-08-10 15:32:03.949642"
+        },
+        {
+            "tool_slug": "timestamp-conv",
+            "article_1": "articles/timestamp-conv-guide-20260810153203949657.html",
+            "article_2": "articles/timestamp-conv-tips-20260810153203949657.html",
+            "date": "2026-08-10 15:32:03.949810"
+        },
+        {
+            "tool_slug": "json-formatter",
+            "article_1": "articles/json-formatter-guide-20260810153203949824.html",
+            "article_2": "articles/json-formatter-tips-20260810153203949824.html",
+            "date": "2026-08-10 15:32:03.949923"
         }
     ]
 }
