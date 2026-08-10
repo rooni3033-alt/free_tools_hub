@@ -235,6 +235,36 @@
             "article_1": "articles/json-formatter-guide-20260810051017808160.html",
             "article_2": "articles/json-formatter-tips-20260810051017808160.html",
             "date": "2026-08-10 05:10:17.808189"
+        },
+        {
+            "tool_slug": "timestamp-conv",
+            "article_1": "articles/timestamp-conv-guide-20260810113120800717.html",
+            "article_2": "articles/timestamp-conv-tips-20260810113120800717.html",
+            "date": "2026-08-10 11:31:20.800793"
+        },
+        {
+            "tool_slug": "word-counter",
+            "article_1": "articles/word-counter-guide-20260810113120800803.html",
+            "article_2": "articles/word-counter-tips-20260810113120800803.html",
+            "date": "2026-08-10 11:31:20.800839"
+        },
+        {
+            "tool_slug": "box-shadow-gen",
+            "article_1": "articles/box-shadow-gen-guide-20260810113120800844.html",
+            "article_2": "articles/box-shadow-gen-tips-20260810113120800844.html",
+            "date": "2026-08-10 11:31:20.800877"
+        },
+        {
+            "tool_slug": "color-palette",
+            "article_1": "articles/color-palette-guide-20260810113120800882.html",
+            "article_2": "articles/color-palette-tips-20260810113120800882.html",
+            "date": "2026-08-10 11:31:20.800920"
+        },
+        {
+            "tool_slug": "markdown-to-html",
+            "article_1": "articles/markdown-to-html-guide-20260810113120800925.html",
+            "article_2": "articles/markdown-to-html-tips-20260810113120800925.html",
+            "date": "2026-08-10 11:31:20.800956"
         }
     ]
 }
