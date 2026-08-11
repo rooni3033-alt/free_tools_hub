@@ -1,390 +1,93 @@
-{
-    "tools": [
-        {
-            "name": "Timestamp Converter",
-            "slug": "timestamp-conv",
-            "tool_url": "tools/timestamp-conv.html",
-            "date": "2026-08-09 15:54:35.954658"
-        },
-        {
-            "name": "CSS Box Shadow Generator",
-            "slug": "box-shadow-gen",
-            "tool_url": "tools/box-shadow-gen.html",
-            "date": "2026-08-09 15:54:35.954709"
-        },
-        {
-            "name": "QR Code Generator",
-            "slug": "qr-code-gen",
-            "tool_url": "tools/qr-code-gen.html",
-            "date": "2026-08-09 15:54:35.954754"
-        },
-        {
-            "name": "Password Generator",
-            "slug": "secure-pass-gen",
-            "tool_url": "tools/secure-pass-gen.html",
-            "date": "2026-08-09 15:54:35.954795"
-        },
-        {
-            "name": "JSON Formatter & Validator",
-            "slug": "json-formatter",
-            "tool_url": "tools/json-formatter.html",
-            "date": "2026-08-09 15:54:35.954836"
-        },
-        {
-            "name": "Markdown to HTML",
-            "slug": "markdown-to-html",
-            "tool_url": "tools/markdown-to-html.html",
-            "date": "2026-08-09 17:17:47.194549"
-        },
-        {
-            "name": "Base64 Encoder Decoder",
-            "slug": "base64-tool",
-            "tool_url": "tools/base64-tool.html",
-            "date": "2026-08-09 17:17:47.194603"
-        },
-        {
-            "name": "Color Palette Extractor",
-            "slug": "color-palette",
-            "tool_url": "tools/color-palette.html",
-            "date": "2026-08-09 17:17:47.194648"
-        },
-        {
-            "name": "Image Compressor Pro",
-            "slug": "image-compressor",
-            "tool_url": "tools/image-compressor.html",
-            "date": "2026-08-09 17:17:47.194691"
-        },
-        {
-            "name": "Word & Character Counter",
-            "slug": "word-counter",
-            "tool_url": "tools/word-counter.html",
-            "date": "2026-08-09 17:17:47.194735"
-        }
-    ],
-    "articles_history": [
-        {
-            "tool_slug": "json-formatter",
-            "article_1": "articles/json-formatter-guide-20260809155435954856.html",
-            "article_2": "articles/json-formatter-tips-20260809155435954856.html",
-            "date": "2026-08-09 15:54:35.954982"
-        },
-        {
-            "tool_slug": "qr-code-gen",
-            "article_1": "articles/qr-code-gen-guide-20260809155435954997.html",
-            "article_2": "articles/qr-code-gen-tips-20260809155435954997.html",
-            "date": "2026-08-09 15:54:35.955085"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260809155435955098.html",
-            "article_2": "articles/timestamp-conv-tips-20260809155435955098.html",
-            "date": "2026-08-09 15:54:35.955184"
-        },
-        {
-            "tool_slug": "secure-pass-gen",
-            "article_1": "articles/secure-pass-gen-guide-20260809155435955196.html",
-            "article_2": "articles/secure-pass-gen-tips-20260809155435955196.html",
-            "date": "2026-08-09 15:54:35.955279"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260809155435955292.html",
-            "article_2": "articles/box-shadow-gen-tips-20260809155435955292.html",
-            "date": "2026-08-09 15:54:35.955376"
-        },
-        {
-            "tool_slug": "base64-tool",
-            "article_1": "articles/base64-tool-guide-20260809171747194764.html",
-            "article_2": "articles/base64-tool-tips-20260809171747194764.html",
-            "date": "2026-08-09 17:17:47.194876"
-        },
-        {
-            "tool_slug": "image-compressor",
-            "article_1": "articles/image-compressor-guide-20260809171747194891.html",
-            "article_2": "articles/image-compressor-tips-20260809171747194891.html",
-            "date": "2026-08-09 17:17:47.194994"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260809171747195009.html",
-            "article_2": "articles/word-counter-tips-20260809171747195009.html",
-            "date": "2026-08-09 17:17:47.195133"
-        },
-        {
-            "tool_slug": "secure-pass-gen",
-            "article_1": "articles/secure-pass-gen-guide-20260809171747195150.html",
-            "article_2": "articles/secure-pass-gen-tips-20260809171747195150.html",
-            "date": "2026-08-09 17:17:47.195254"
-        },
-        {
-            "tool_slug": "qr-code-gen",
-            "article_1": "articles/qr-code-gen-guide-20260809171747195268.html",
-            "article_2": "articles/qr-code-gen-tips-20260809171747195268.html",
-            "date": "2026-08-09 17:17:47.195358"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260809171747195371.html",
-            "article_2": "articles/timestamp-conv-tips-20260809171747195371.html",
-            "date": "2026-08-09 17:17:47.195470"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260809171747195484.html",
-            "article_2": "articles/box-shadow-gen-tips-20260809171747195484.html",
-            "date": "2026-08-09 17:17:47.195569"
-        },
-        {
-            "tool_slug": "json-formatter",
-            "article_1": "articles/json-formatter-guide-20260809171747195582.html",
-            "article_2": "articles/json-formatter-tips-20260809171747195582.html",
-            "date": "2026-08-09 17:17:47.195671"
-        },
-        {
-            "tool_slug": "color-palette",
-            "article_1": "articles/color-palette-guide-20260809211708963196.html",
-            "article_2": "articles/color-palette-tips-20260809211708963196.html",
-            "date": "2026-08-09 21:17:08.963349"
-        },
-        {
-            "tool_slug": "qr-code-gen",
-            "article_1": "articles/qr-code-gen-guide-20260809211708963364.html",
-            "article_2": "articles/qr-code-gen-tips-20260809211708963364.html",
-            "date": "2026-08-09 21:17:08.963485"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260809211708963500.html",
-            "article_2": "articles/word-counter-tips-20260809211708963500.html",
-            "date": "2026-08-09 21:17:08.963583"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260809211708963593.html",
-            "article_2": "articles/timestamp-conv-tips-20260809211708963593.html",
-            "date": "2026-08-09 21:17:08.963668"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260809211708963678.html",
-            "article_2": "articles/box-shadow-gen-tips-20260809211708963678.html",
-            "date": "2026-08-09 21:17:08.963751"
-        },
-        {
-            "tool_slug": "image-compressor",
-            "article_1": "articles/image-compressor-guide-20260809211708963760.html",
-            "article_2": "articles/image-compressor-tips-20260809211708963760.html",
-            "date": "2026-08-09 21:17:08.963832"
-        },
-        {
-            "tool_slug": "secure-pass-gen",
-            "article_1": "articles/secure-pass-gen-guide-20260809211708963841.html",
-            "article_2": "articles/secure-pass-gen-tips-20260809211708963841.html",
-            "date": "2026-08-09 21:17:08.963914"
-        },
-        {
-            "tool_slug": "base64-tool",
-            "article_1": "articles/base64-tool-guide-20260809211708963922.html",
-            "article_2": "articles/base64-tool-tips-20260809211708963922.html",
-            "date": "2026-08-09 21:17:08.963997"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260810051017807803.html",
-            "article_2": "articles/box-shadow-gen-tips-20260810051017807803.html",
-            "date": "2026-08-10 05:10:17.807891"
-        },
-        {
-            "tool_slug": "secure-pass-gen",
-            "article_1": "articles/secure-pass-gen-guide-20260810051017807906.html",
-            "article_2": "articles/secure-pass-gen-tips-20260810051017807906.html",
-            "date": "2026-08-10 05:10:17.807953"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260810051017807962.html",
-            "article_2": "articles/timestamp-conv-tips-20260810051017807962.html",
-            "date": "2026-08-10 05:10:17.808007"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260810051017808013.html",
-            "article_2": "articles/word-counter-tips-20260810051017808013.html",
-            "date": "2026-08-10 05:10:17.808045"
-        },
-        {
-            "tool_slug": "base64-tool",
-            "article_1": "articles/base64-tool-guide-20260810051017808051.html",
-            "article_2": "articles/base64-tool-tips-20260810051017808051.html",
-            "date": "2026-08-10 05:10:17.808081"
-        },
-        {
-            "tool_slug": "color-palette",
-            "article_1": "articles/color-palette-guide-20260810051017808086.html",
-            "article_2": "articles/color-palette-tips-20260810051017808086.html",
-            "date": "2026-08-10 05:10:17.808121"
-        },
-        {
-            "tool_slug": "markdown-to-html",
-            "article_1": "articles/markdown-to-html-guide-20260810051017808126.html",
-            "article_2": "articles/markdown-to-html-tips-20260810051017808126.html",
-            "date": "2026-08-10 05:10:17.808155"
-        },
-        {
-            "tool_slug": "json-formatter",
-            "article_1": "articles/json-formatter-guide-20260810051017808160.html",
-            "article_2": "articles/json-formatter-tips-20260810051017808160.html",
-            "date": "2026-08-10 05:10:17.808189"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260810113120800717.html",
-            "article_2": "articles/timestamp-conv-tips-20260810113120800717.html",
-            "date": "2026-08-10 11:31:20.800793"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260810113120800803.html",
-            "article_2": "articles/word-counter-tips-20260810113120800803.html",
-            "date": "2026-08-10 11:31:20.800839"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260810113120800844.html",
-            "article_2": "articles/box-shadow-gen-tips-20260810113120800844.html",
-            "date": "2026-08-10 11:31:20.800877"
-        },
-        {
-            "tool_slug": "color-palette",
-            "article_1": "articles/color-palette-guide-20260810113120800882.html",
-            "article_2": "articles/color-palette-tips-20260810113120800882.html",
-            "date": "2026-08-10 11:31:20.800920"
-        },
-        {
-            "tool_slug": "markdown-to-html",
-            "article_1": "articles/markdown-to-html-guide-20260810113120800925.html",
-            "article_2": "articles/markdown-to-html-tips-20260810113120800925.html",
-            "date": "2026-08-10 11:31:20.800956"
-        },
-        {
-            "tool_slug": "color-palette",
-            "article_1": "articles/color-palette-guide-20260810153203949226.html",
-            "article_2": "articles/color-palette-tips-20260810153203949226.html",
-            "date": "2026-08-10 15:32:03.949366"
-        },
-        {
-            "tool_slug": "qr-code-gen",
-            "article_1": "articles/qr-code-gen-guide-20260810153203949384.html",
-            "article_2": "articles/qr-code-gen-tips-20260810153203949384.html",
-            "date": "2026-08-10 15:32:03.949485"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260810153203949500.html",
-            "article_2": "articles/word-counter-tips-20260810153203949500.html",
-            "date": "2026-08-10 15:32:03.949642"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260810153203949657.html",
-            "article_2": "articles/timestamp-conv-tips-20260810153203949657.html",
-            "date": "2026-08-10 15:32:03.949810"
-        },
-        {
-            "tool_slug": "json-formatter",
-            "article_1": "articles/json-formatter-guide-20260810153203949824.html",
-            "article_2": "articles/json-formatter-tips-20260810153203949824.html",
-            "date": "2026-08-10 15:32:03.949923"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260810183659295698.html",
-            "article_2": "articles/timestamp-conv-tips-20260810183659295698.html",
-            "date": "2026-08-10 18:36:59.295809"
-        },
-        {
-            "tool_slug": "secure-pass-gen",
-            "article_1": "articles/secure-pass-gen-guide-20260810183659295822.html",
-            "article_2": "articles/secure-pass-gen-tips-20260810183659295822.html",
-            "date": "2026-08-10 18:36:59.295879"
-        },
-        {
-            "tool_slug": "json-formatter",
-            "article_1": "articles/json-formatter-guide-20260810183659295884.html",
-            "article_2": "articles/json-formatter-tips-20260810183659295884.html",
-            "date": "2026-08-10 18:36:59.295931"
-        },
-        {
-            "tool_slug": "color-palette",
-            "article_1": "articles/color-palette-guide-20260810183659295935.html",
-            "article_2": "articles/color-palette-tips-20260810183659295935.html",
-            "date": "2026-08-10 18:36:59.295984"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260810183659295987.html",
-            "article_2": "articles/word-counter-tips-20260810183659295987.html",
-            "date": "2026-08-10 18:36:59.296036"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260810220611246987.html",
-            "article_2": "articles/word-counter-tips-20260810220611246987.html",
-            "date": "2026-08-10 22:06:11.247141"
-        },
-        {
-            "tool_slug": "base64-tool",
-            "article_1": "articles/base64-tool-guide-20260810220611247159.html",
-            "article_2": "articles/base64-tool-tips-20260810220611247159.html",
-            "date": "2026-08-10 22:06:11.247266"
-        },
-        {
-            "tool_slug": "markdown-to-html",
-            "article_1": "articles/markdown-to-html-guide-20260810220611247280.html",
-            "article_2": "articles/markdown-to-html-tips-20260810220611247280.html",
-            "date": "2026-08-10 22:06:11.247381"
-        },
-        {
-            "tool_slug": "qr-code-gen",
-            "article_1": "articles/qr-code-gen-guide-20260810220611247394.html",
-            "article_2": "articles/qr-code-gen-tips-20260810220611247394.html",
-            "date": "2026-08-10 22:06:11.247495"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260810220611247508.html",
-            "article_2": "articles/box-shadow-gen-tips-20260810220611247508.html",
-            "date": "2026-08-10 22:06:11.247640"
-        },
-        {
-            "tool_slug": "word-counter",
-            "article_1": "articles/word-counter-guide-20260811044957921087.html",
-            "article_2": "articles/word-counter-tips-20260811044957921087.html",
-            "date": "2026-08-11 04:49:57.921200"
-        },
-        {
-            "tool_slug": "box-shadow-gen",
-            "article_1": "articles/box-shadow-gen-guide-20260811044957921211.html",
-            "article_2": "articles/box-shadow-gen-tips-20260811044957921211.html",
-            "date": "2026-08-11 04:49:57.921283"
-        },
-        {
-            "tool_slug": "base64-tool",
-            "article_1": "articles/base64-tool-guide-20260811044957921291.html",
-            "article_2": "articles/base64-tool-tips-20260811044957921291.html",
-            "date": "2026-08-11 04:49:57.921360"
-        },
-        {
-            "tool_slug": "image-compressor",
-            "article_1": "articles/image-compressor-guide-20260811044957921367.html",
-            "article_2": "articles/image-compressor-tips-20260811044957921367.html",
-            "date": "2026-08-11 04:49:57.921428"
-        },
-        {
-            "tool_slug": "timestamp-conv",
-            "article_1": "articles/timestamp-conv-guide-20260811044957921434.html",
-            "article_2": "articles/timestamp-conv-tips-20260811044957921434.html",
-            "date": "2026-08-11 04:49:57.921497"
-        }
-    ]
-}
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+One-Time Fix: Remove fake tools and regenerate them as real functional apps
+Run: python fix_old_tools.py
+"""
+
+import json
+import os
+import shutil
+from pathlib import Path
+
+TOOLS_DIR = Path("./tools")
+DB_FILE = Path("./database.json")
+
+def is_fake_tool(html_content):
+    """Detect if a tool HTML is fake/placeholder (no real JS functionality)"""
+    html_lower = html_content.lower()
+    
+    # Signs of a fake tool:
+    # 1. No <script> tag at all
+    has_script = '<script>' in html_lower or '<script ' in html_lower
+    
+    # 2. Contains placeholder text
+    has_placeholder = any(x in html_lower for x in [
+        'coming soon', 'placeholder', 'under construction', 
+        'قريباً', 'قريبا', 'قيد الإنشاء', 'وهمية', 'fake'
+    ])
+    
+    # 3. No input, textarea, or button elements (can't be interactive)
+    has_interactive = any(x in html_lower for x in ['<input', '<textarea', '<button', '<select'])
+    
+    # If it has no script AND no interactive elements = 100% fake
+    # If it has placeholder text = fake
+    if has_placeholder:
+        return True
+    if not has_script and not has_interactive:
+        return True
+    if not has_script:
+        return True  # A real tool MUST have JS logic
+    
+    return False
+
+def main():
+    print("🔍 Scanning for fake/old tools...")
+    
+    if not DB_FILE.exists():
+        print("❌ database.json not found!")
+        return
+    
+    with open(DB_FILE, "r", encoding="utf-8") as f:
+        db = json.load(f)
+    
+    tools = db.get("tools", [])
+    original_count = len(tools)
+    
+    real_tools = []
+    removed_count = 0
+    
+    for tool in tools:
+        slug = tool.get("slug", "")
+        html_path = TOOLS_DIR / f"{slug}.html"
+        
+        if not html_path.exists():
+            print(f"⚠️  Missing file: {slug}.html — removing from DB")
+            removed_count += 1
+            continue
+        
+        with open(html_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        if is_fake_tool(content):
+            print(f"🗑️  Removing fake tool: {tool.get('name', slug)}")
+            # Delete the fake HTML file
+            html_path.unlink(missing_ok=True)
+            removed_count += 1
+        else:
+            real_tools.append(tool)
+    
+    # Update database
+    db["tools"] = real_tools
+    
+    with open(DB_FILE, "w", encoding="utf-8") as f:
+        json.dump(db, f, ensure_ascii=False, indent=2)
+    
+    print(f"\n✅ Cleanup complete!")
+    print(f"   Original tools: {original_count}")
+    print(f"   Real tools kept: {len(real_tools)}")
+    print(f"   Fake tools removed: {removed_count}")
+    print(f"\n🚀 Next step: Run 'python main.py' to generate {removed_count} new REAL tools!")
+
+if __name__ == "__main__":
+    main()
