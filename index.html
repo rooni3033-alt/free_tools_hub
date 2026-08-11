@@ -29,7 +29,7 @@
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search tools by name... / ابحث عن أداة..." onkeyup="filterTools()">
 
     <div class="container" id="toolsGrid">
-        <!-- يتم تعبئة الأدوات تلقائياً -->
+        <!-- يتم تعبئة الأدوات تلقائياً من database.json -->
     </div>
 
     <script>
@@ -42,6 +42,9 @@
                     allToolsData = data.tools;
                     renderTools(allToolsData);
                 }
+            })
+            .catch(err => {
+                document.getElementById('toolsGrid').innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>جاري تحميل الأدوات...</p>";
             });
 
         function renderTools(tools) {
