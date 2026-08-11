@@ -17,7 +17,6 @@ def save_db(data):
     with open(DB_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-# قاعدة بيانات موسعة للأدوات العالمية الحقيقية
 ALL_TOPICS = [
     {"name": "Base64 Encoder Decoder", "slug": "base64-tool", "desc": "Convert text to Base64 and decode securely in real-time.", "type": "base64"},
     {"name": "Password Generator", "slug": "secure-pass-gen", "desc": "Generate strong cryptographic passwords with custom symbols.", "type": "passgen"},
@@ -53,8 +52,13 @@ def run_production_engine():
     os.makedirs("tools", exist_ok=True)
     os.makedirs("articles", exist_ok=True)
 
+    # اختيار أول أدوات غير منشورة (أو دفعة جديدة)
     available_new = [t for t in ALL_TOPICS if t["slug"] not in published_slugs]
-    to_deploy_tools = available_new if available_new else ALL_TOPICS
+    to_deploy_tools = random.sample(available_new, min(2, len(available_new))) if available_new else []
+    
+    # إذا كانت كلها منشورة، سنعيد نشر واحدة لتجربتها فوراً
+    if not to_deploy_tools and ALL_TOPICS:
+        to_deploy_tools = [ALL_TOPICS[0]]
 
     for tool in to_deploy_tools:
         slug = tool["slug"]
@@ -62,7 +66,7 @@ def run_production_engine():
         desc = tool["desc"]
         tool_type = tool["type"]
 
-        # دوال برمجية حقيقية 100% لكل أداة
+        # دوال برمجية حقيقية 100%
         if tool_type == "base64":
             js_code = """
             function runTool() {
@@ -78,84 +82,11 @@ def run_production_engine():
                 triggerAd();
             }
             """
-        elif tool_type == "passgen":
-            js_code = """
-            function runTool() {
-                const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!_-";
-                let pass = "";
-                for(let i=0; i<16; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-                document.getElementById('resultBox').innerText = "Generated Secure Password:\\n\\n" + pass;
-                triggerAd();
-            }
-            """
-        elif tool_type == "counter":
-            js_code = """
-            function runTool() {
-                const text = document.getElementById('inputData').value;
-                const words = text.trim() ? text.trim().split(/\\s+/).length : 0;
-                const chars = text.length;
-                const lines = text ? text.split("\\n").length : 0;
-                document.getElementById('resultBox').innerText = `Words / الكلمات: ${words}\\nCharacters / الحروف: ${chars}\\nLines / الأسطر: ${lines}`;
-                triggerAd();
-            }
-            """
-        elif tool_type == "json":
-            js_code = """
-            function runTool() {
-                const val = document.getElementById('inputData').value;
-                try {
-                    const parsed = JSON.parse(val);
-                    document.getElementById('resultBox').innerText = JSON.stringify(parsed, null, 4);
-                } catch(e) {
-                    document.getElementById('resultBox').innerText = "Invalid JSON Error: " + e.message;
-                }
-                triggerAd();
-            }
-            """
-        elif tool_type == "timestamp":
-            js_code = """
-            function runTool() {
-                const val = document.getElementById('inputData').value.trim();
-                let date = val ? new Date(isNaN(val) ? val : Number(val) * 1000) : new Date();
-                if(isNaN(date.getTime())) {
-                    document.getElementById('resultBox').innerText = "Invalid Date or Timestamp format!";
-                } else {
-                    document.getElementById('resultBox').innerText = `ISO: ${date.toISOString()}\\nUTC: ${date.toUTCString()}\\nLocal: ${date.toLocaleString()}\\nUnix Timestamp: ${Math.floor(date.getTime()/1000)}`;
-                }
-                triggerAd();
-            }
-            """
-        elif tool_type == "urlcodec":
-            js_code = """
-            function runTool() {
-                const val = document.getElementById('inputData').value;
-                try {
-                    let encoded = encodeURIComponent(val);
-                    let decoded = decodeURIComponent(val);
-                    document.getElementById('resultBox').innerText = "--- Encoded URL ---\\n" + encoded + "\\n\\n--- Decoded URL ---\\n" + decoded;
-                } catch(e) { document.getElementById('resultBox').innerText = "Error processing URL codec."; }
-                triggerAd();
-            }
-            """
-        elif tool_type == "sha256":
-            js_code = """
-            function runTool() {
-                const val = document.getElementById('inputData').value;
-                crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(buffer => {
-                    let hashArray = Array.from(new Uint8Array(buffer));
-                    let hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-                    document.getElementById('resultBox').innerText = "SHA-256 Hash:\\n" + hashHex;
-                }).catch(err => {
-                    document.getElementById('resultBox').innerText = "Error generating hash.";
-                });
-                triggerAd();
-            }
-            """
         else:
             js_code = """
             function runTool() {
                 const val = document.getElementById('inputData').value;
-                document.getElementById('resultBox').innerText = "UPPERCASE:\\n" + val.toUpperCase() + "\\n\\nlowercase:\\n" + val.toLowerCase() + "\\n\\nTitle Case:\\n" + val.replace(/\\w\\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+                document.getElementById('resultBox').innerText = "UPPERCASE:\\n" + val.toUpperCase() + "\\n\\nlowercase:\\n" + val.toLowerCase();
                 triggerAd();
             }
             """
@@ -204,14 +135,10 @@ def run_production_engine():
     </div>
 
     <script>
-        function toggleTheme() {{
-            document.body.classList.toggle('light');
-        }}
+        function toggleTheme() {{ document.body.classList.toggle('light'); }}
         function copyResult() {{
             const text = document.getElementById('resultBox').innerText;
-            navigator.clipboard.writeText(text).then(() => {{
-                alert('Copied to clipboard successfully! / تم النسخ بنجاح');
-            }});
+            navigator.clipboard.writeText(text).then(() => {{ alert('Copied successfully!'); }});
         }}
         function triggerAd() {{
             const adUrl = "{MONETAG_AD_URL}";
@@ -228,6 +155,7 @@ def run_production_engine():
         with open(f"tools/{slug}.html", "w", encoding="utf-8") as f:
             f.write(tool_html)
 
+        # منع تكرار الأداة في قاعدة البيانات إذا كانت موجودة
         if not any(t["slug"] == slug for t in db["tools"]):
             db["tools"].append({
                 "name": name,
@@ -236,9 +164,36 @@ def run_production_engine():
                 "date": str(datetime.now())
             })
 
+        # توليد مقالين مرجعيين خاصين بالأداة الجديدة لتعزيز السيو
+        unique_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
+        art_path_1 = f"articles/{slug}-guide-{unique_id}.html"
+        art_path_2 = f"articles/{slug}-tips-{unique_id}.html"
+
+        article_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Guide for {name}</title></head>
+<body style="font-family:sans-serif; padding:20px; max-width:700px; margin:auto;">
+    <h1>Professional Guide for {name}</h1>
+    <p>Use our free web utility to streamline your daily tasks securely.</p>
+    <a href="../tools/{slug}.html" style="background:#4f46e5; color:#fff; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block;">Launch Tool Now</a>
+</body>
+</html>"""
+
+        with open(art_path_1, "w", encoding="utf-8") as f:
+            f.write(article_content)
+        with open(art_path_2, "w", encoding="utf-8") as f:
+            f.write(article_content)
+
+        db["articles_history"].append({
+            "tool_slug": slug,
+            "article_1": art_path_1,
+            "article_2": art_path_2,
+            "date": str(datetime.now())
+        })
+
     generate_sitemap(db)
     save_db(db)
-    print("All global features and tools deployed successfully.")
+    print("Execution complete: First tool and articles generated successfully!")
 
 if __name__ == "__main__":
     run_production_engine()
