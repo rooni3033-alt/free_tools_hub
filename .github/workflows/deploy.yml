@@ -1,37 +1,54 @@
-name: Autonomous Machine Engine
+name: Auto Generate & Deploy
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  # يعمل تلقائياً كل 3 ساعات
-  workflow_dispatch: # زر التشغيل اليدوي من لوحة تحكم GitHub
+    # تشغيل كل 3 ساعات
+    - cron: '0 */3 * * *'
+  # السماح بالتشغيل اليدوي من تبويب Actions
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
+      # 1. سحب الكود
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Set up Python
+      # 2. إعداد Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-          cache: 'pip'
+          python-version: '3.11'
 
-      - name: Run Automation Script
+      # 3. تشغيل المحرك البرمجي
+      - name: Run Content Generator
         run: python main.py
 
-      - name: Commit and push generated files
+      # 4. التحقق من وجود تغييرات (شرط git diff)
+      - name: Check for changes
+        id: diff
         run: |
-          git config --global user.name 'Autonomous Bot'
-          git config --global user.email 'bot@users.noreply.github.com'
-          git add .
-          # التحقق من وجود تغييرات جديدة قبل عمل commit لتجنب أخطاء النظام
+          git add -A
           if git diff --cached --quiet; then
-            echo "No new changes to commit."
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit."
           else
-            git commit -m "Auto-deploy: tools, articles, and sitemap update [Bot]"
-            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected, ready to commit."
           fi
+
+      # 5. رفع التغييرات فقط إذا وجدت
+      - name: Commit and push changes
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "🤖 Auto: New tools/articles [$(date +'%Y-%m-%d %H:%M UTC')]"
+          git push
