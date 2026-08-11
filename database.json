@@ -355,6 +355,36 @@
             "article_1": "articles/box-shadow-gen-guide-20260810220611247508.html",
             "article_2": "articles/box-shadow-gen-tips-20260810220611247508.html",
             "date": "2026-08-10 22:06:11.247640"
+        },
+        {
+            "tool_slug": "word-counter",
+            "article_1": "articles/word-counter-guide-20260811044957921087.html",
+            "article_2": "articles/word-counter-tips-20260811044957921087.html",
+            "date": "2026-08-11 04:49:57.921200"
+        },
+        {
+            "tool_slug": "box-shadow-gen",
+            "article_1": "articles/box-shadow-gen-guide-20260811044957921211.html",
+            "article_2": "articles/box-shadow-gen-tips-20260811044957921211.html",
+            "date": "2026-08-11 04:49:57.921283"
+        },
+        {
+            "tool_slug": "base64-tool",
+            "article_1": "articles/base64-tool-guide-20260811044957921291.html",
+            "article_2": "articles/base64-tool-tips-20260811044957921291.html",
+            "date": "2026-08-11 04:49:57.921360"
+        },
+        {
+            "tool_slug": "image-compressor",
+            "article_1": "articles/image-compressor-guide-20260811044957921367.html",
+            "article_2": "articles/image-compressor-tips-20260811044957921367.html",
+            "date": "2026-08-11 04:49:57.921428"
+        },
+        {
+            "tool_slug": "timestamp-conv",
+            "article_1": "articles/timestamp-conv-guide-20260811044957921434.html",
+            "article_2": "articles/timestamp-conv-tips-20260811044957921434.html",
+            "date": "2026-08-11 04:49:57.921497"
         }
     ]
 }
