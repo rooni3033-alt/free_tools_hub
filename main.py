@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Empire Web Engine - Mega Utility & Content Hub
-Generates 500 tools (then stops) + infinite articles
-Updates database.json every cycle
+Empire Web Engine v2 — 500 Functional Tools + Infinite Articles
+Every tool is a real mini-app (HTML+CSS+JS). Zero backend required.
 """
 
 import json
 import os
 import random
+import hashlib
 import textwrap
 from datetime import datetime
 from pathlib import Path
@@ -26,277 +26,104 @@ AD_LINK = "https://omg10.com/4/11349784"
 TOOL_CATEGORIES = [
     "Developer", "Designer", "SEO", "Security", "Productivity",
     "Converter", "Calculator", "Analyzer", "Generator", "Formatter",
-    "Tester", "Monitor", "Optimizer", "Cleaner", "Tracker"
+    "Tester", "Monitor", "Optimizer", "Utility", "Math"
 ]
 
 TOOL_PREFIXES = [
     "Smart", "Pro", "Ultra", "Mega", "Quick", "Auto", "Easy", "Super",
-    "Fast", "Instant", "Advanced", "Dynamic", "Global", "Prime", "Elite"
+    "Fast", "Instant", "Advanced", "Dynamic", "Global", "Prime", "Elite",
+    "Hyper", "Nano", "Cyber", "Tech", "Cloud", "Digital", "Net", "Web",
+    "Code", "Data", "Pixel", "Byte", "Bit", "Core", "Alpha", "Beta", "Sigma"
 ]
 
-TOOL_NAMES = [
-    "JSON Formatter", "Base64 Encoder", "Password Generator", "Color Picker",
-    "CSS Minifier", "Markdown Editor", "Regex Tester", "QR Code Generator",
-    "URL Shortener", "Image Compressor", "PDF Merger", "Word Counter",
-    "Lorem Ipsum Generator", "Diff Checker", "Code Beautifier", "HTML Encoder",
-    "JWT Decoder", "Hash Generator", "IP Lookup", "SSL Checker", "DNS Lookup",
-    "Whois Lookup", "Website Speed Test", "Meta Tag Analyzer", "Sitemap Generator",
-    " robots.txt Generator", "Favicon Generator", "Gradient Generator",
-    "Box Shadow Generator", "Flexbox Generator", "Grid Generator", "SVG Optimizer",
-    "PNG to JPG", "WebP Converter", "Image to Base64", "Base64 to Image",
-    "CSV to JSON", "JSON to CSV", "XML to JSON", "YAML to JSON", "SQL Formatter",
-    "Cron Expression Generator", "Timestamp Converter", "Unit Converter",
-    "Currency Converter", "Loan Calculator", "Percentage Calculator", "Age Calculator",
-    "BMI Calculator", "Calorie Calculator", "Password Strength Checker",
-    "Username Generator", "Domain Name Generator", "Logo Maker", "Icon Generator",
-    "Favicon Generator", "Palette Generator", "Font Pairing", "Mockup Generator",
-    "Screenshot Tool", "Screen Recorder", "Voice Recorder", "Text to Speech",
-    "Speech to Text", "Translator", "Grammar Checker", "Plagiarism Checker",
-    "Readability Score", "Keyword Density", "Backlink Checker", "SERP Simulator",
-    "Page Authority Checker", "Domain Authority Checker", "Moz Rank Checker",
-    "Alexa Rank Checker", "Social Counter", "Share Link Generator", "UTM Builder",
-    "Email Validator", "Email Extractor", "Bulk Email Checker", "SMTP Tester",
-    "Port Scanner", "Ping Tool", "Traceroute", "Subnet Calculator", "MAC Lookup",
-    "Browser Info", "Screen Resolution", "What is My IP", "User Agent Parser",
-    "HTTP Headers", "Redirect Checker", "Link Extractor", "Broken Link Checker",
-    "Page Size Checker", "Source Code Viewer", "Website Snapshot", "Mobile Emulator",
-    "Responsive Tester", "PageSpeed Insights", "Core Web Vitals", "AMP Validator",
-    "Structured Data Test", "Rich Snippet Test", "Hreflang Checker", "Canonical Checker",
-    "Open Graph Checker", "Twitter Card Validator", "Pinterest Rich Pins",
-    "Instagram Downloader", "YouTube Thumbnail", "TikTok Downloader", "Twitter Video",
-    "Facebook Video", "LinkedIn Post Maker", "Instagram Post Maker", "Story Maker",
-    "Meme Generator", "GIF Maker", "Video Trimmer", "Audio Cutter", "MP3 Converter",
-    "Video to GIF", "GIF to Video", "Subtitle Generator", "Transcript Generator",
-    "Podcast Maker", "Audio Joiner", "Voice Changer", "Noise Reducer", "Beat Maker",
-    "Invoice Generator", "Receipt Maker", "Quote Generator", "Proposal Maker",
-    "Contract Generator", "NDA Generator", "Resume Builder", "CV Maker",
-    "Portfolio Builder", "Business Card Maker", "Letterhead Maker", "Signature Maker",
-    "Barcode Generator", "QR Scanner", "ISBN Lookup", "Credit Card Validator",
-    "IBAN Checker", "SWIFT/BIC Lookup", "Tax Calculator", "VAT Calculator",
-    "Tip Calculator", "Split Bill", "Expense Tracker", "Budget Planner",
-    "Investment Calculator", "Compound Interest", "Retirement Calculator",
-    "Mortgage Calculator", "Rent vs Buy", "Car Loan Calculator", "Fuel Cost Calculator",
-    "Trip Cost Calculator", "Time Zone Converter", "World Clock", "Meeting Planner",
-    "Countdown Timer", "Stopwatch", "Pomodoro Timer", "Focus Timer", "Habit Tracker",
-    "To-Do List", "Kanban Board", "Gantt Chart", "Mind Map Maker", "Flowchart Maker",
-    "Wireframe Tool", "Prototype Tool", "Mockup Tool", "Sitemap Maker", "User Persona",
-    "Journey Map", "Competitor Analyzer", "SWOT Analysis", "PEST Analysis",
-    "Business Model Canvas", "Value Proposition", "Elevator Pitch", "Pitch Deck Maker",
-    "Financial Model", "Cash Flow Projection", "Break-Even Analysis", "ROI Calculator",
-    "A/B Test Calculator", "Statistical Significance", "Sample Size Calculator",
-    "Confidence Interval", "Standard Deviation", "Variance Calculator", "Z-Score",
-    "T-Test Calculator", "Chi-Square Test", "Correlation Calculator", "Regression",
-    "Data Visualizer", "Chart Maker", "Graph Plotter", "Pie Chart Maker", "Bar Chart",
-    "Line Chart", "Scatter Plot", "Histogram Maker", "Box Plot", "Heat Map",
-    "Tree Map", "Sankey Diagram", "Radar Chart", "Bubble Chart", "Candlestick",
-    "Network Graph", "Org Chart Maker", "Family Tree", "Timeline Maker", "Roadmap",
-    "Release Notes", "Changelog Generator", "Version Comparator", "Git Command Builder",
-    "Dockerfile Generator", "Docker Compose", "Kubernetes YAML", "Terraform Generator",
-    "CloudFormation", "Serverless Template", "API Endpoint Maker", "Webhook Tester",
-    "GraphQL Builder", "REST Client", "SOAP Client", "gRPC Tester", "Postman Collection",
-    "OpenAPI Generator", "Swagger UI", "API Documentation", "SDK Generator",
-    "Code Linter", "Code Formatter", "Static Analysis", "Dependency Checker",
-    "Vulnerability Scanner", "License Checker", "Code Coverage", "Benchmark Tool",
-    "Profiler", "Debugger", "Log Analyzer", "Error Tracker", "Crash Reporter",
-    "Performance Monitor", "Uptime Monitor", "Status Page", "Incident Manager",
-    "Alert Manager", "On-Call Scheduler", "Runbook Generator", "Playbook Maker",
-    "Wiki Generator", "Knowledge Base", "FAQ Generator", "Help Center", "Chatbot Builder",
-    "Live Chat", "Ticket System", "Feedback Form", "Survey Maker", "Poll Maker",
-    "Quiz Maker", "Exam Generator", "Certificate Maker", "Badge Generator",
-    "Leaderboard", "Gamification", "Loyalty Program", "Referral Generator",
-    "Affiliate Link", "Coupon Generator", "Discount Calculator", "Price Comparator",
-    "Shipping Calculator", "Tracking Number", "Label Maker", "Packing List",
-    "Inventory Manager", "Stock Tracker", "Reorder Point", "EOQ Calculator",
-    "Safety Stock", "Lead Time Calculator", "Supplier Scorecard", "RFQ Generator",
-    "Purchase Order", "GRN Maker", "Bill of Materials", "Work Order", "Job Card",
-    "Timesheet", "Attendance Tracker", "Leave Manager", "Payroll Calculator",
-    "Payslip Generator", "Tax Form Generator", "W-2 Maker", "1099 Generator",
-    "Invoice Tracker", "Payment Reminder", "Receipt Scanner", "Expense Report",
-    "Mileage Log", "Per Diem Calculator", "Reimbursement Form", "Petty Cash",
-    "Budget vs Actual", "Forecasting Tool", "Scenario Planner", "What-If Analysis",
-    "Monte Carlo", "Risk Matrix", "Decision Tree", "Priority Matrix", "Eisenhower",
-    "Pareto Analysis", "Fishbone Diagram", "5 Whys", "Root Cause Analysis",
-    "FMEA Calculator", "Control Chart", "Capability Index", "Six Sigma Calculator",
-    "Lean Canvas", "Value Stream Map", "Kaizen Board", "5S Audit", "Gemba Walk",
-    "Standard Work", "Work Instruction", "SOP Generator", "Checklist Maker",
-    "Inspection Form", "Audit Report", "Non-Conformance", "CAPA Tracker",
-    "Document Control", "Change Request", "ECN Generator", "Drawing Comparator",
-    "BOM Comparator", "Revision Tracker", "ECO Manager", "PLM Connector",
-    "CAD Viewer", "STEP Converter", "STL Viewer", "Mesh Repair", "3D Print Slicer",
-    "G-Code Simulator", "CNC Calculator", "Feed Rate", "Spindle Speed", "Cutting Time",
-    "Tool Life", "Wear Calculator", "Tolerance Stack", "GD&T Symbol", "Datum Reference",
-    "Surface Finish", "Hardness Converter", "Material Selector", "Weight Calculator",
-    "Center of Gravity", "Moment of Inertia", "Stress Analysis", "Deflection Calculator",
-    "Beam Calculator", "Column Calculator", "Truss Analysis", "Frame Analysis",
-    "Plate Calculator", "Shell Analysis", "Buckling Check", "Fatigue Life",
-    "Fracture Mechanics", "Creep Calculator", "Thermal Expansion", "Heat Transfer",
-    "Fluid Flow", "Pipe Sizer", "Pump Selector", "Valve Sizing", "Orifice Calculator",
-    "Venturi Meter", "Manometer", "Reynolds Number", "Nusselt Number", "Prandtl Number",
-    "Moody Chart", "Darcy-Weisbach", "Hazen-Williams", "Colebrook-White", "Fanning",
-    "Compressor Power", "Turbine Efficiency", "Heat Exchanger", "Cooling Tower",
-    "Boiler Efficiency", "Furnace Sizing", "HVAC Load", "Psychrometric Chart",
-    "Refrigeration Cycle", "Absorption Chiller", "Heat Pump COP", "Solar Panel Sizer",
-    "Wind Turbine", "Battery Bank", "Inverter Selector", "Charge Controller",
-    "Cable Sizer", "Voltage Drop", "Short Circuit", "Arc Flash", "Grounding",
-    "Lightning Protection", "Surge Arrester", "Transformer Sizing", "Motor Starter",
-    "VFD Selector", "Soft Starter", "Power Factor", "Harmonic Filter", "UPS Sizer",
-    "Generator Sizing", "Load Bank", "Energy Audit", "Power Quality", "Smart Meter",
-    "Substation Design", "Protection Relay", "SCADA Simulator", "PLC Programmer",
-    "HMI Designer", "DCS Configurator", "RTU Programmer", "Modbus Scanner",
-    "OPC Client", "MQTT Broker", "LoRa Calculator", "Zigbee Network", "Bluetooth Range",
-    "WiFi Planner", "5G Coverage", "Satellite Link", "Fiber Optic", "DWDM Calculator",
-    "OTDR Trace", "Splice Loss", "Connector Loss", "Attenuation", "Bandwidth",
-    "Latency Calculator", "Jitter", "Packet Loss", "Throughput", "QoS Calculator",
-    "MPLS Design", "VPN Tunnel", "Firewall Rule", "ACL Generator", "NAT Table",
-    "Load Balancer", "Reverse Proxy", "CDN Optimizer", "Cache Warmer", "Edge Node",
-    "Origin Shield", "DDoS Mitigator", "WAF Rule", "Bot Detector", "Captcha Maker",
-    "Rate Limiter", "Circuit Breaker", "Retry Policy", "Timeout Calculator",
-    "Health Check", "Canary Deploy", "Blue-Green", "Rolling Update", "Feature Flag",
-    "A/B Router", "Multivariate", "Funnel Analyzer", "Cohort Analysis", "Retention",
-    "Churn Predictor", "LTV Calculator", "CAC Calculator", "NPS Calculator", "CSAT",
-    "CES Score", "VOC Analyzer", "Sentiment Analysis", "Topic Modeling", "NER Tagger",
-    "POS Tagger", "Dependency Parser", "Constituency", "Semantic Role", "Coreference",
-    "Text Summarizer", "Keyword Extractor", "Entity Linker", "Relation Extractor",
-    "Event Extractor", "Temporal Parser", "Spatial Parser", "Intent Classifier",
-    "Slot Filler", "Dialogue Manager", "Response Generator", "Paraphrase Generator",
-    "Question Generator", "Answer Generator", "Fact Checker", "Claim Verifier",
-    "Evidence Retriever", "Argument Mapper", "Fallacy Detector", "Bias Checker",
-    "Toxicity Filter", "Hate Speech", "Misinformation", "Deepfake Detector",
-    "Image Classifier", "Object Detector", "Segmentation", "Face Detector",
-    "OCR Engine", "Document Parser", "Table Extractor", "Form Recognizer",
-    "Receipt Parser", "Invoice OCR", "ID Scanner", "Passport Reader", "Barcode OCR",
-    "Handwriting", "Signature Verify", "Fingerprint Match", "Iris Scanner",
-    "Voice Biometric", "Speaker ID", "Language ID", "Accent Detector", "Emotion Recognizer",
-    "Age Estimator", "Gender Classifier", "Ethnicity", "Attractiveness", "Similarity",
-    "Style Transfer", "Super Resolution", "Denoising", "Inpainting", "Colorization",
-    "Sketch to Photo", "Photo to Sketch", "Cartoonizer", "Anime Maker", "Avatar Generator",
-    "Face Swap", "Lip Sync", "Deep Nostalgia", "Motion Capture", "Pose Estimator",
-    "Gesture Recognizer", "Sign Language", "Body Measurement", "Virtual Try-On",
-    "Room Planner", "Furniture Arranger", "Color Matcher", "Paint Calculator",
-    "Tile Calculator", "Flooring Estimator", "Roofing Calculator", "Siding Calculator",
-    "Drywall Estimator", "Insulation Calculator", "HVAC Duct Sizer", "Airflow Balancer",
-    "Refrigerant Charge", "Combustion Analysis", "Carbon Footprint", "Water Footprint",
-    "Waste Calculator", "Recycling Sorter", "Composting Guide", "Solar Angle",
-    "Shading Analysis", "Daylighting", "Glare Calculator", "Thermal Comfort",
-    "Indoor Air Quality", "Ventilation Rate", "Filtration Efficiency", "MERV Rating",
-    "HEPA Calculator", "UV Dose", "Ozone Generator", "Ionizer", "Humidifier Sizer",
-    "Dehumidifier", "Air Purifier", "Water Filter", "Reverse Osmosis", "Softener",
-    "Distillation", "Chlorination", "UV Sterilization", "Ozonation", "pH Calculator",
-    "Alkalinity", "Hardness", "TDS Meter", "Conductivity", "Salinity", "Chlorine",
-    "Bromine", "Cyanuric Acid", "Calcium Hardness", "Stabilizer", "Shock Treatment",
-    "Algaecide", "Clarifier", "Flocculant", "Enzyme", "Phosphate Remover",
-    "Metal Sequestrant", "Stain Preventer", "Scale Inhibitor", "Corrosion Inhibitor",
-    "Biocide", "Dispersant", "Antifoam", "Defoamer", "Emulsifier", "Surfactant",
-    "Solvent", "Thinner", "Reducer", "Catalyst", "Accelerator", "Inhibitor",
-    "Promoter", "Initiator", "Crosslinker", "Curing Agent", "Hardener", "Plasticizer",
-    "Stabilizer", "Antioxidant", "UV Absorber", "Flame Retardant", "Foaming Agent",
-    "Blowing Agent", "Nucleating Agent", "Clarifier", "Optical Brightener", "Pigment",
-    "Dye", "Lake", "Toner", "Extender", "Filler", "Reinforcement", "Nanocomposite",
-    "Masterbatch", "Compound", "Alloy", "Blend", "Copolymer", "Terpolymer", "Elastomer",
-    "Thermoset", "Thermoplastic", "Composite", "Ceramic", "Glass", "Metal", "Polymer",
-    "Semiconductor", "Superconductor", "Ferroelectric", "Piezoelectric", "Pyroelectric",
-    "Magnetostrictive", "Shape Memory", "Electroactive", "Photonic", "Phononic",
-    "Metamaterial", "Plasmonic", "Spintronic", "Quantum Dot", "Graphene", "Carbon Nanotube",
-    "Fullerene", "Diamond", "Graphite", "Charcoal", "Activated Carbon", "Biochar",
-    "Compost", "Vermicompost", "Manure", "Fertilizer", "Pesticide", "Herbicide",
-    "Fungicide", "Nematicide", "Molluscicide", "Rodenticide", "Avicide", "Piscicide",
-    "Insect Growth Regulator", "Pheromone", "Attractant", "Repellent", "Antifeedant",
-    "Chemosterilant", "Microbial", "Biological", "Botanical", "Mineral", "Organic",
-    "Synthetic", "Neonicotinoid", "Pyrethroid", "Organophosphate", "Carbamate",
-    "Glyphosate", "Paraquat", "Atrazine", "2,4-D", "Dicamba", "Chlorpyrifos",
-    "Malathion", "Diazinon", "Dimethoate", "Methomyl", "Carbaryl", "Methiocarb",
-    "Metaldehyde", "Methoprene", "Hydroprene", "Kinoprene", "Fenoxycarb", "Pyriproxyfen",
-    "Diflubenzuron", "Teflubenzuron", "Novaluron", "Lufenuron", "Hexaflumuron",
-    "Chitin Synthesis", "Juvenile Hormone", "Ecdysone", "Molting Accelerator",
-    "Prothoracicotropic", "Allatostatin", "Allatotropin", "Tachykinin", "FMRFamide",
-    "Proctolin", "Sulfakinin", "Corazonin", "Crustacean Cardioactive", "Ecdysis",
-    "Bursicon", "ETH", "CCAP", "EH", "IVP", "PBAN", "DH", "AKH", "DILP", "IIS",
-    "TOR", "AMPK", "Sirtuin", "FOXO", "HNF4", "HR96", "ERR", "PPAR", "RXR",
-    "EcR", "USP", "FTZ-F1", "HR3", "HR4", "E75", "E78", "BR-C", "E93", "FTZ",
-    "KNI", "KR", "HB", "GT", "BCD", "CAD", "TLL", "HKB", "KNI", "KR", "KNRL",
-    "EGON", "SLO", "SNA", "EVE", "RUN", "FUSHI TARAZU", "ENGRAILED", "INVECTED",
-    "WINGLESS", "PATCHED", "SMOOTHENED", "CUBITUS INTERRUPTUS", "DECAPENTAPLEGIC",
-    "THICK VEINS", "MAD", "MEDEA", "SCHNURRI", "Daughters Against", "Dad", "Dpp",
-    "Gbb", "Screw", "Activin", "Myo", "Mst", "Gdf", "Bmp", "Tgf", "Nodal", "Lefty",
-    "Vg1", "Derriere", "Xnr", "Coco", "Cerberus", "Chordin", "Noggin", "Follistatin",
-    "Gremlin", "DAN", "Sost", "Wise", "Twisted Gastrulation", "BAMBI", "USAG1",
-    "RGM", "DRAGON", "HEMOJUVELIN", "NEOGENIN", "DCC", "UNC5", "ROBO", "SLIT",
-    "NETRIN", "DCC", "NEO", "UNC5", "DAM", "RGM", "BMP", "WNT", "SHH", "HH",
-    "IHH", "DHH", "PTCH", "PTCH2", "SMO", "SUFU", "GLI", "KIF7", "GAS1", "CDON",
-    "BOC", "LRP", "FZD", "DVL", "AXIN", "APC", "GSK3B", "CK1", "Beta-Catenin",
-    "TCF", "LEF", "SFRP", "DKK", "WIF", "RSPO", "ZNRF3", "RNF43", "LGR", "ROR",
-    "RYK", "MUSK", "FRY", "VANGL", "SCRB", "DLG", "LLGL", "PKC", "CDC42", "RAC",
-    "RHO", "ROCK", "MLC", "PAK", "PIX", "GIT", "NCK", "WASp", "WAVE", "ARP",
-    "Cortactin", "Dynamin", "Clathrin", "AP2", "Epsin", "CALM", "SNARE", "Synaptobrevin",
-    "Syntaxin", "SNAP25", "Complexin", "Synaptotagmin", "Munc13", "Munc18", "Rab",
-    "Rab3GAP", "Rab3GEP", "RIM", "RBP", "Piccolo", "Bassoon", "CAST", "ELKS",
-    "Liprin", "GIT", "PIX", "PAK", "Lamellipodin", "Mena", "VASP", "EVL", "Profilin",
-    "Cofilin", "Arp2/3", "WASP", "N-WASP", "WAVE", "WHAMM", "JMY", "Cortactin",
-    "HS1", "Dynamin2", "Amphiphysin", "Endophilin", "Intersectin", "FCHo", "Eps15",
-    "AP180", "Stonin", "Syndapin", "PACSIN", "FBP17", "CIP4", "TOCA", "FNBP1",
-    "Fer", "Fes", "Fps", "Ack", "TNK2", "STK", "PYK2", "FAK", "Src", "Lyn", "Fyn",
-    "Yes", "Hck", "Lck", "Blk", "Brk", "Srm", "Frk", "Abl", "Arg", "BCR-ABL",
-    "TEL-JAK2", "PCM1-JAK2", "BCR-PDGFR", "ETV6-PDGFRB", "FIP1L1-PDGFRA", "KIT-D816V",
-    "FLT3-ITD", "NPM1", "CEBPA", "RUNX1", "ASXL1", "TP53", "IDH1", "IDH2", "TET2",
-    "DNMT3A", "WT1", "SF3B1", "SRSF2", "U2AF1", "ZRSR2", "STAG2", "BCOR", "PHF6",
-    "EZH2", "ASXL1", "CREBBP", "EP300", "KMT2A", "KMT2D", "NSD1", "SETD2", "KDM6A",
-    "KDM5C", "ARID1A", "ARID1B", "SMARCA4", "SMARCB1", "PBRM1", "BRD4", "BRD2",
-    "BRD3", "BRDT", "BET", "JQ1", "I-BET", "OTX015", "CPI-0610", "ABBV-075",
-    "BMS-986158", "GS-5829", "INCB054329", "PFI-1", "RVX-208", "Apabetalone",
-    "Resveratrol", "Pterostilbene", "Curcumin", "Quercetin", "Genistein", "Daidzein",
-    "Glycitein", "Equol", "Enterolactone", "Enterodiol", "Urolithin", "Ellagitannin",
-    "Punicalagin", "Punicalin", "Gallic Acid", "Epigallocatechin", "Epicatechin",
-    "Catechin", "Theaflavin", "Thearubigin", "Chlorogenic", "Caffeic", "Ferulic",
-    "Sinapic", "p-Coumaric", "Hydroxybenzoic", "Vanillic", "Syringic", "Salicylic",
-    "Aspirin", "Ibuprofen", "Naproxen", "Diclofenac", "Celecoxib", "Rofecoxib",
-    "Valdecoxib", "Lumiracoxib", "Etoricoxib", "Parecoxib", "Ketorolac", "Indomethacin",
-    "Sulindac", "Etodolac", "Ketoprofen", "Flurbiprofen", "Oxaprozin", "Piroxicam",
-    "Meloxicam", "Tenoxicam", "Lornoxicam", "Nabumetone", "Meclofenamate", "Mefenamic",
-    "Tolfenamic", "Flufenamic", "Meclofenamic", "Diflunisal", "Salsalate", "Choline",
-    "Magnesium", "Sodium", "Potassium", "Ammonium", "Lysine", "Arginine", "Ornithine",
-    "Citrulline", "Homocitrulline", "Canavanine", "Canaline", "O-Acetylserine",
-    "Cysteine", "Homocysteine", "Methionine", "Taurine", "Cystine", "Cystathionine",
-    "Lanthionine", "Djenkolic", "Selenocysteine", "Selenomethionine", "Methylselenocysteine",
-    "Se-Methylselenomethionine", "Gamma-Glutamylcysteine", "Glutathione", "S-Glutathionyl",
-    "S-Nitrosoglutathione", "Sulfiredoxin", "Peroxiredoxin", "Thioredoxin", "Glutaredoxin",
-    "Methionine Sulfoxide", "Methionine Sulfone", "Taurine", "Hypotaurine", "Taurocyamine",
-    "Taurocholic", "Tauroursodeoxycholic", "Taurochenodeoxycholic", "Taurodeoxycholic",
-    "Taurolithocholic", "Taurohyodeoxycholic", "Glycocholic", "Glycochenodeoxycholic",
-    "Glycodeoxycholic", "Glycolithocholic", "Glycohyodeoxycholic", "Glycoursodeoxycholic",
-    "Cholic", "Chenodeoxycholic", "Deoxycholic", "Lithocholic", "Hyodeoxycholic",
-    "Ursodeoxycholic", "Muricholic", "Nordeoxycholic", "Apocholic", "Isocholic",
-    "Beta-Muricholic", "Omega-Muricholic", "Alpha-Muricholic", "Hyocholic", "Murocholic"
+TOOL_SUFFIXES = [
+    "JSON Formatter", "Base64 Tool", "URL Encoder", "Password Generator", "Color Studio",
+    "Unit Converter", "Word Counter", "Lorem Generator", "QR Maker", "Markdown Editor",
+    "CSS Minifier", "HTML Entities", "Hash Generator", "Case Converter", "CSV Converter",
+    "Image Base64", "Base64 Image", "Diff Checker", "Regex Tester", "Base Converter",
+    "Percentage Calc", "Loan Calculator", "BMI Calculator", "Age Calculator", "Stopwatch",
+    "Countdown Timer", "Pomodoro", "Random Number", "UUID Maker", "Slug Generator",
+    "Duplicate Remover", "Line Sorter", "Text Reverser", "Palindrome Check", "IP Validator",
+    "Email Checker", "Card Validator", "Barcode Maker", "Morse Translator", "Cipher Tool",
+    "Binary Converter", "Hex Converter", "HTML Previewer", "Shadow Generator", "Flexbox Builder",
+    "Gradient Maker", "Radius Generator", "Aspect Calc", "Screen Info", "Browser Stats",
+    "Meta Generator", "Robots Builder", "Sitemap Maker", "Twitter Card", "OG Generator",
+    "Favicon Maker", "Placeholder Img", "Meme Creator", "Image Resizer", "ASCII Art",
+    "Typing Test", "World Clock", "Timezone Calc", "Date Diff", "Days Counter",
+    "Invoice Maker", "Receipt Builder", "Password Check", "Username Gen", "Business Card",
+    "Resume Builder", "JSON Path", "XML Formatter", "YAML Parser", "SQL Formatter",
+    "Cron Parser", "Timestamp Conv", "Unix Time", "Palette Gen", "Fake Data",
+    "API Tester", "HTTP Builder", "JWT Decoder", "Table Maker", "Chart Builder",
+    "Mind Mapper", "Flowchart", "Certificate", "Badge Maker", "Leaderboard",
+    "Quiz Builder", "Poll Maker", "Survey Tool", "Todo List", "Kanban Board",
+    "Habit Tracker", "Expense Log", "Budget Planner", "Pomodoro Pro", "Focus Timer",
+    "Tip Calculator", "Split Bill", "Tax Calculator", "VAT Calc", "ROI Calculator",
+    "Currency Conv", "Fuel Calc", "Trip Planner", "Mileage Log", "Calendar Gen",
+    "Prime Check", "Fibonacci", "Factorial", "GCD LCM", "Equation Solver",
+    "Matrix Calc", "Vector Calc", "Stats Calc", "Probability", "Fraction Calc",
+    "Ratio Calc", "Root Calc", "Log Calc", "Trig Calc", "Circle Calc",
+    "Triangle Solver", "Distance Calc", "Slope Calc", "Compound Interest", "Retirement Calc",
+    "Mortgage Calc", "Car Loan", "Savings Calc", "Investment", "Break-even",
+    "Ohm Law", "Power Calc", "Resistor Calc", "LED Resistor", "Antenna Calc",
+    "Subnet Calc", "IP Subnet", "CIDR Calc", "Binary Calc", "IPv6 Calc",
+    "Hash MD5", "Hash SHA1", "Hash SHA256", "Hash SHA512", "Checksum",
+    "Password Hash", "HMAC Generator", "UUID v4", "UUID v5", "NanoID",
+    "Token Generator", "Key Generator", "CSR Generator", "PEM Parser", "SSL Checker",
+    "Port Scanner", "DNS Lookup", "Whois Lookup", "IP Geolocation", "Blacklist Check",
+    "URL Parser", "URL Expander", "Redirect Check", "Header Check", "SSL Info",
+    "Cipher AES", "Cipher DES", "Cipher RSA", "Cipher Blowfish", "Steganography",
+    "File Hash", "String Hash", "Compare Hash", "Verify Hash", "Hash Cracker",
+    "Hex Editor", "Bin Editor", "Dec Editor", "Oct Editor", "Base32",
+    "Base58", "Base85", "UUEncode", "XXEncode", "Quoted Printable",
+    "Punycode", "IDN Converter", "URL Slug", "URL Shortener", "Deep Link",
+    "UTM Builder", "Campaign URL", "Affiliate Link", "Share Link", "Embed Code",
+    "Iframe Generator", "Object Embed", "PDF Embed", "Audio Embed", "Video Embed",
+    "Playlist Maker", "RSS Feed", "Atom Feed", "Sitemap XML", "Sitemap HTML",
+    "Breadcrumb", "Pagination", "Tag Cloud", "Archive List", "Calendar Widget",
+    "Clock Widget", "Counter Widget", "Timer Widget", "Progress Bar", "Loading Spinner",
+    "Skeleton Screen", "Placeholder Text", "Dummy Image", "Avatar Generator", "Identicon",
+    "Robohash", "Dice Bear", "Gravatar URL", "Profile Card", "Social Card",
+    "Preview Card", "Link Preview", "Rich Snippet", "Schema Markup", "Microdata",
+    "RDFa Generator", "JSON-LD Gen", "Open Graph", "Twitter Card", "WhatsApp Share",
+    "Facebook Share", "LinkedIn Share", "Pinterest Pin", "Reddit Share", "Telegram Share",
+    "Email Share", "SMS Share", "QR Share", "NFC Tag", "Deep Link Gen",
+    "App Link", "Universal Link", "Intent URL", "Custom Scheme", "WebAPK",
+    "PWA Manifest", "Service Worker", "App Shell", "Splash Screen", "Theme Color",
+    "Icon Generator", "Maskable Icon", "Adaptive Icon", "Notification Icon", "Badge Icon",
+    "Shortcut Icon", "Apple Touch", "Favicon ICO", "Favicon SVG", "Favicon PNG",
+    "Windows Tile", "Safari Pin", "Chrome Theme", "Firefox Theme", "Edge Theme",
+    "Opera Theme", "Vivaldi Theme", "Brave Theme", "Arc Theme", "Safari Theme"
 ]
 
 ARTICLE_TEMPLATES = [
     {
         "title": "أفضل {count} أداة مجانية لتسريع {task} في {year}",
-        "intro": "في عالم {domain} المتسارع، يبحث الجميع عن حلول فعّالة توفر الوقت والمال. إليك مجموعة من الأدوات المجانية التي ستغير طريقة عملك.",
-        "body": "تُعدّ أدوات {tool_type} من أهم ما يحتاجه كل {professional} في {year}. من خلال تجربتنا المكثّفة، وجدنا أن الأدوات المجانية أحياناً تتفوّق على المدفوعة في الكفاءة.\n\nإحدى الميزات الرائعة هي القدرة على {feature} بدون تسجيل أو اشتراك. هذا يعني أنك تستطيع البدء فوراً.\n\nننصحك بزيارة أدواتنا المجانية المتخصصة في هذا المجال، فهي مصممة خصيصاً لمساعدتك في تحقيق أقصى إنتاجية.",
+        "intro": "في عالم {domain} المتسارع، يبحث الجميع عن حلول فعّالة. إليك مجموعة من الأدوات المجانية التي ستغير طريقة عملك.",
+        "body": "تُعدّ أدوات {tool_type} من أهم ما يحتاجه كل {professional}. من خلال تجربتنا، وجدنا أن الأدوات المجانية أحياناً تتفوّق على المدفوعة.\n\nإحدى الميزات الرائعة هي القدرة على {feature} بدون تسجيل. هذا يعني أنك تستطيع البدء فوراً.\n\nننصحك بزيارة أدواتنا المجانية المتخصصة في هذا المجال، فهي مصممة خصيصاً لمساعدتك في تحقيق أقصى إنتاجية.",
         "outro": "لا تنسَ مشاركة هذه الأدوات مع فريقك. ابدأ الآن واستفد من كل لحظة."
     },
     {
         "title": "دليلك الشامل لـ {topic}: نصائح مالية وتقنية {year}",
-        "intro": "سواء كنت مبتدئاً أو محترفاً، فإن فهم {topic} يمكن أن يوفر عليك آلاف الدولارات سنوياً. في هذا الدليل، نكشف عن الأسرار التي يستخدمها الخبراء.",
-        "body": "أولاً، يجب أن تفهم أن {concept} ليس مجرد مصطلح تقني، بل هو استثمار حقيقي في مستقبلك. من خلال تطبيق {strategy}، ستتمكن من تقليل النفقات بنسبة تصل إلى {percent}%.\n\nثانياً، الأدوات المجانية المتوفرة على منصتنا توفر لك كل ما تحتاجه للبدء. لا حاجة لشراء برامج باهظة الثمن.\n\nثالثاً، سرعة الأعمال تبدأ من اتخاذ القرار الصحيح في الوقت المناسب. كل دقيقة توفرها هذه الأدوات هي دقيقة تستثمرها في نمو مشروعك.",
-        "outro": "تذكر: النجاح يأتي من التراكم اليومي للتحسينات الصغيرة. ابدأ بتطبيق نصيحة واحدة اليوم."
+        "intro": "سواء كنت مبتدئاً أو محترفاً، فإن فهم {topic} يمكن أن يوفر عليك آلاف الدولارات سنوياً.",
+        "body": "أولاً، يجب أن تفهم أن {concept} ليس مجرد مصطلح تقني، بل هو استثمار حقيقي. من خلال تطبيق {strategy}، ستتمكن من تقليل النفقات بنسبة تصل إلى {percent}%.\n\nثانياً، الأدوات المجانية المتوفرة على منصتنا توفر لك كل ما تحتاجه للبدء.\n\nثالثاً، سرعة الأعمال تبدأ من اتخاذ القرار الصحيح في الوقت المناسب.",
+        "outro": "تذكر: النجاح يأتي من التراكم اليومي للتحسينات الصغيرة."
     },
     {
         "title": "كيف تُضاعف إنتاجيتك باستخدام {tool_type} المجانية؟",
         "intro": "الإنتاجية ليست عن العمل بجد، بل عن العمل بذكاء. وفي {year}، الذكاء يعني استخدام الأدوات الصحيحة.",
-        "body": "لاحظنا أن {percent}% من المستخدمين يضيعون ساعات في مهام يمكن إنجازها بضغطة زر واحدة. هل أنت واحد منهم؟\n\nباستخدام أدوات {domain} المتوفرة لدينا، يمكنك:\n• إنجاز {task} في ثوانٍ بدلاً من ساعات\n• توفير {saving} شهرياً على الاشتراكات\n• تحسين جودة عملك بشكل ملحوظ\n\nالأدوات المجانية ليست بديلاً رديئاً، بل هي فرصة للتجربة قبل الالتزام بأي تكلفة.",
+        "body": "لاحظنا أن {percent}% من المستخدمين يضيعون ساعات في مهام يمكن إنجازها بضغطة زر. هل أنت واحد منهم؟\n\nباستخدام أدوات {domain} المتوفرة لدينا، يمكنك:\n• إنجاز {task} في ثوانٍ بدلاً من ساعات\n• توفير {saving} شهرياً على الاشتراكات\n• تحسين جودة عملك بشكل ملحوظ",
         "outro": "جرب الأدوات الآن وانضم لآلاف المستخدمين الذين غيّروا طريقة عملهم."
     },
     {
         "title": "{year}: سنة التحول الرقمي مع {topic}",
         "intro": "لم يعد التحول الرقمي خياراً، بل أصبح ضرورة. ومع {topic}، يمكنك أن تكون في المقدمة دون إنفاق ثروة.",
-        "body": "في السابق، كانت أدوات {domain} تتطلب فرقاً كاملة وميزانيات ضخمة. أما اليوم، فبفضل التقنيات المفتوحة المصدر والأدوات المجانية، أصبح كل شيء متاحاً للجميع.\n\nنحن في منصتنا نؤمن بأن المعرفة يجب أن تكون متاحة. لذلك نوفر لك:\n- أدوات مجانية 100%\n- مقالات تقنية عميقة\n- نصائح مالية عملية\n- استراتيجيات تسريع الأعمال\n\n{concept} هو المستقبل، والمستقبل يبدأ الآن.",
+        "body": "في السابق، كانت أدوات {domain} تتطلب ميزانيات ضخمة. أما اليوم، فبفضل التقنيات المفتوحة المصدر والأدوات المجانية، أصبح كل شيء متاحاً.\n\nنحن في منصتنا نؤمن بأن المعرفة يجب أن تكون متاحة. لذلك نوفر لك:\n- أدوات مجانية 100%\n- مقالات تقنية عميقة\n- نصائح مالية عملية\n- استراتيجيات تسريع الأعمال",
         "outro": "لا تنتظر الغد. ابدأ رحلتك الرقمية اليوم مع أدواتنا المجانية."
     },
     {
         "title": "5 أخطاء مالية يقع فيها رواد الأعمال وكيف تتجنبها بـ {tool_type}",
         "intro": "أظهرت الدراسات أن {percent}% من الشركات الناشئة تفشل بسبب سوء إدارة المالية. لكن الأدوات الصحيحة يمكن أن تغير هذه الإحصائية.",
-        "body": "الخطأ الأول: الاعتماد على برامج مدفوعة قبل التحقق من البدائل المجانية. أدواتنا توفر نفس الوظائف بدون أي تكلفة.\n\nالخطأ الثاني: عدم تتبع المصروفات الصغيرة. باستخدام أدوات {domain}، يمكنك مراقبة كل قرش.\n\nالخطأ الثالث: إهمال {task}. هذا يكلفك وقتك، ووقتك = مال.\n\nالخطأ الرابع والخامس... اكتشفهم بنفسك من خلال أدواتنا الذكية.",
+        "body": "الخطأ الأول: الاعتماد على برامج مدفوعة قبل التحقق من البدائل المجانية. أدواتنا توفر نفس الوظائف بدون أي تكلفة.\n\nالخطأ الثاني: عدم تتبع المصروفات الصغيرة. باستخدام أدوات {domain}، يمكنك مراقبة كل قرش.\n\nالخطأ الثالث: إهمال {task}. هذا يكلفك وقتك، ووقتك = مال.",
         "outro": "الأدوات المجانية ليست فقط لتوفير المال، بل لبناء عادة الإدارة الرشيدة منذ اليوم الأول."
     }
 ]
@@ -495,242 +322,485 @@ SAVINGS = ["100$", "200$", "500$", "50$", "300$", "150$"]
 
 PERCENTS = ["30", "40", "50", "60", "70", "80", "90"]
 
-# ===================== HELPERS =====================
+# ===================== FUNCTIONAL TOOL TEMPLATES =====================
+# Each returns a full HTML string with working JS
 
-def load_db():
-    if DB_FILE.exists():
-        with open(DB_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"tools": [], "articles": [], "meta": {"last_run": None, "tool_count": 0}}
-
-def save_db(db):
-    with open(DB_FILE, "w", encoding="utf-8") as f:
-        json.dump(db, f, ensure_ascii=False, indent=2)
-
-def ensure_dirs():
-    TOOLS_DIR.mkdir(parents=True, exist_ok=True)
-    ARTICLES_DIR.mkdir(parents=True, exist_ok=True)
-
-def generate_tool_name(index):
-    """Generate a unique tool name using pools"""
-    prefix = random.choice(TOOL_PREFIXES)
-    base = TOOL_NAMES[index % len(TOOL_NAMES)]
-    cat = random.choice(TOOL_CATEGORIES)
-    return f"{prefix} {base} - {cat}", cat
-
-def generate_tool_page(tool_id, name, category, description):
-    slug = f"tool-{tool_id}"
-    html = f'''<!DOCTYPE html>
+def tool_json_formatter(name, desc):
+    return f'''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{name} | أداة مجانية</title>
-  <meta name="description" content="{description}">
-  <link rel="canonical" href="./tools/{slug}.html">
-  <style>
-    body {{ font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 0; }}
-    .container {{ max-width: 800px; margin: 40px auto; padding: 20px; }}
-    h1 {{ color: #38bdf8; }}
-    .badge {{ background: #1e293b; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; color: #94a3b8; display: inline-block; margin-bottom: 20px; }}
-    .desc {{ font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; }}
-    .ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
-    .ad a {{ color: #38bdf8; text-decoration: none; font-weight: bold; font-size: 1.1rem; }}
-    .ad a:hover {{ text-decoration: underline; }}
-    .back {{ display: inline-block; margin-top: 20px; color: #94a3b8; text-decoration: none; }}
-    .back:hover {{ color: #38bdf8; }}
-  </style>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 900px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+textarea {{ width: 100%; height: 200px; background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 14px; resize: vertical; }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 5px; }}
+.btn:hover {{ background: #0ea5e9; }}
+.output {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-top: 15px; white-space: pre-wrap; font-family: monospace; min-height: 100px; overflow-x: auto; }}
+.error {{ color: #ef4444; }}
+.success {{ color: #10b981; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+.back:hover {{ color: #38bdf8; }}
+</style>
 </head>
 <body>
-  <div class="container">
-    <span class="badge">{category}</span>
-    <h1>{name}</h1>
-    <p class="desc">{description}</p>
-    <div class="ad">
-      <p>🚀 اكتشف المزيد من الأدوات والفرص الرائعة</p>
-      <a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
-    </div>
-    <a href="../index.html" class="back">← العودة للرئيسية</a>
-  </div>
+<div class="container">
+<h1>🔧 {name}</h1>
+<p>{desc}</p>
+<textarea id="input" placeholder="الصق JSON هنا..."></textarea><br>
+<button class="btn" onclick="format()">تنسيق Pretty</button>
+<button class="btn" onclick="minify()">ضغط Minify</button>
+<button class="btn" onclick="validate()">تحقق Validate</button>
+<button class="btn" onclick="copyOut()">نسخ النتيجة</button>
+<div id="output" class="output">النتيجة تظهر هنا...</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+function format() {{
+  try {{
+    const obj = JSON.parse(document.getElementById('input').value);
+    document.getElementById('output').textContent = JSON.stringify(obj, null, 2);
+    document.getElementById('output').className = 'output success';
+  }} catch(e) {{ document.getElementById('output').textContent = '❌ خطأ: ' + e.message; document.getElementById('output').className = 'output error'; }}
+}}
+function minify() {{
+  try {{
+    const obj = JSON.parse(document.getElementById('input').value);
+    document.getElementById('output').textContent = JSON.stringify(obj);
+    document.getElementById('output').className = 'output success';
+  }} catch(e) {{ document.getElementById('output').textContent = '❌ خطأ: ' + e.message; document.getElementById('output').className = 'output error'; }}
+}}
+function validate() {{
+  try {{
+    JSON.parse(document.getElementById('input').value);
+    document.getElementById('output').textContent = '✅ JSON صالح تماماً'; document.getElementById('output').className = 'output success';
+  }} catch(e) {{ document.getElementById('output').textContent = '❌ خطأ: ' + e.message; document.getElementById('output').className = 'output error'; }}
+}}
+function copyOut() {{
+  const t = document.getElementById('output').textContent;
+  navigator.clipboard.writeText(t).then(() => alert('تم النسخ!'));
+}}
+</script>
 </body>
 </html>'''
-    return html
 
-def generate_article(article_id):
-    template = random.choice(ARTICLE_TEMPLATES)
-    year = datetime.now().year
-    count = random.choice([5, 7, 10, 12, 15])
-    task = random.choice(TASKS)
-    domain = random.choice(DOMAINS)
-    topic = random.choice(TECH_TOPICS)
-    tool_type = random.choice(TOOL_TYPES)
-    professional = random.choice(PROFESSIONALS)
-    feature = random.choice(FEATURES)
-    concept = random.choice(CONCEPTS)
-    strategy = random.choice(STRATEGIES)
-    percent = random.choice(PERCENTS)
-    saving = random.choice(SAVINGS)
-    
-    title = template["title"].format(
-        count=count, task=task, year=year, topic=topic,
-        tool_type=tool_type, domain=domain
-    )
-    
-    intro = template["intro"].format(
-        domain=domain, year=year, topic=topic, percent=percent,
-        concept=concept, task=task
-    )
-    
-    body = template["body"].format(
-        tool_type=tool_type, domain=domain, year=year,
-        professional=professional, feature=feature,
-        concept=concept, strategy=strategy, percent=percent,
-        task=task, saving=saving
-    )
-    
-    outro = template["outro"]
-    
-    content = f"{intro}\n\n{body}\n\n{outro}"
-    
-    # Add ad link naturally in the article
-    ad_insert = f"\n\n> 💡 **فرصة لا تُفوّت:** [اكتشف أدواتنا المجانية والعروض المميزة من هنا]({AD_LINK})\n\n"
-    paragraphs = content.split("\n\n")
-    insert_pos = len(paragraphs) // 2
-    paragraphs.insert(insert_pos, ad_insert.strip())
-    content = "\n\n".join(paragraphs)
-    
-    date_str = datetime.now().strftime("%Y-%m-%d")
-    slug = f"article-{article_id}"
-    
-    html = f'''<!DOCTYPE html>
+def tool_base64(name, desc):
+    return f'''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content="{intro[:150]}...">
-  <meta name="keywords" content="{topic}, {domain}, أدوات مجانية, {year}">
-  <link rel="canonical" href="./articles/{slug}.html">
-  <style>
-    body {{ font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 0; line-height: 1.8; }}
-    .container {{ max-width: 800px; margin: 40px auto; padding: 20px; }}
-    h1 {{ color: #38bdf8; font-size: 1.8rem; margin-bottom: 10px; }}
-    .meta {{ color: #94a3b8; font-size: 0.9rem; margin-bottom: 30px; }}
-    .content {{ font-size: 1.1rem; }}
-    .content p {{ margin-bottom: 20px; }}
-    .content a {{ color: #38bdf8; text-decoration: none; }}
-    .content a:hover {{ text-decoration: underline; }}
-    .ad-box {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
-    .ad-box a {{ color: #fbbf24; font-weight: bold; font-size: 1.1rem; }}
-    .back {{ display: inline-block; margin-top: 30px; color: #94a3b8; text-decoration: none; }}
-    .back:hover {{ color: #38bdf8; }}
-  </style>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 800px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+textarea {{ width: 100%; height: 150px; background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 14px; }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 5px; }}
+.btn:hover {{ background: #0ea5e9; }}
+.output {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-top: 15px; white-space: pre-wrap; font-family: monospace; min-height: 80px; word-break: break-all; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>{title}</h1>
-    <div class="meta">📅 {date_str} | 🏷️ {domain} | 📝 {topic}</div>
-    <div class="content">
-      {content.replace(chr(10)+chr(10), '</p><p>').replace('> ', '<blockquote>').replace('</p><p><blockquote>', '<blockquote>')}
-    </div>
-    <div class="ad-box">
-      <p>🚀 استفد من أدواتنا المجانية وعزز إنتاجيتك</p>
-      <a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للوصول للأدوات والعروض</a>
-    </div>
-    <a href="../index.html" class="back">← العودة للرئيسية</a>
-  </div>
+<div class="container">
+<h1>🔧 {name}</h1>
+<p>{desc}</p>
+<textarea id="input" placeholder="أدخل النص أو Base64 هنا..."></textarea><br>
+<button class="btn" onclick="encode()">تشفير Encode</button>
+<button class="btn" onclick="decode()">فك تشفير Decode</button>
+<button class="btn" onclick="copyOut()">نسخ</button>
+<div id="output" class="output">النتيجة تظهر هنا...</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+function encode() {{
+  const t = document.getElementById('input').value;
+  try {{ document.getElementById('output').textContent = btoa(unescape(encodeURIComponent(t))); }}
+  catch(e) {{ document.getElementById('output').textContent = '❌ خطأ: ' + e.message; }}
+}}
+function decode() {{
+  const t = document.getElementById('input').value;
+  try {{ document.getElementById('output').textContent = decodeURIComponent(escape(atob(t))); }}
+  catch(e) {{ document.getElementById('output').textContent = '❌ خطأ: ' + e.message; }}
+}}
+function copyOut() {{
+  navigator.clipboard.writeText(document.getElementById('output').textContent).then(() => alert('تم النسخ!'));
+}}
+</script>
 </body>
 </html>'''
-    
-    # Fix blockquote closing
-    html = html.replace('<blockquote>', '<blockquote>').replace('</p><p><blockquote>', '<blockquote>')
-    
-    return {
-        "id": article_id,
-        "slug": slug,
-        "title": title,
-        "date": date_str,
-        "category": domain,
-        "topic": topic,
-        "content": content,
-        "html": html
-    }
 
-def generate_tool(tool_id):
-    name, category = generate_tool_name(tool_id)
-    description = f"أداة {name} هي حل مجاني متكامل يتيح لك إنجاز مهام {category} بكفاءة عالية وسرعة فائقة. مصممة خصيصاً للمحترفين والمبتدئين على حد سواء."
-    
-    html = generate_tool_page(tool_id, name, category, description)
-    slug = f"tool-{tool_id}"
-    
-    return {
-        "id": tool_id,
-        "slug": slug,
-        "name": name,
-        "category": category,
-        "description": description,
-        "html": html
-    }
-
-def write_tool_file(tool):
-    path = TOOLS_DIR / f"{tool['slug']}.html"
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(tool["html"])
-
-def write_article_file(article):
-    path = ARTICLES_DIR / f"{article['slug']}.html"
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(article["html"])
-
-def update_index_html(db):
-    """Regenerate index.html with fresh data from database"""
-    tools_html = ""
-    for t in db["tools"]:
-        tools_html += f'''
-      <div class="card" data-search="{t['name']} {t['category']} {t['description']}">
-        <div class="card-badge">{t['category']}</div>
-        <h3>{t['name']}</h3>
-        <p>{t['description'][:80]}...</p>
-        <a href="./tools/{t['slug']}.html" class="card-link">استخدم الأداة →</a>
-      </div>'''
-    
-    articles_html = ""
-    for a in db["articles"][-20:]:  # Show last 20 articles
-        articles_html += f'''
-      <div class="card article-card" data-search="{a['title']} {a['topic']} {a['category']}">
-        <div class="card-meta">📅 {a['date']} | 🏷️ {a['category']}</div>
-        <h3>{a['title']}</h3>
-        <p>{a['content'][:100]}...</p>
-        <a href="./articles/{a['slug']}.html" class="card-link">اقرأ المقال →</a>
-      </div>'''
-    
-    index_content = f'''<!DOCTYPE html>
+def tool_url_encoder(name, desc):
+    return f'''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إمبراطورية الويب | 500+ أداة مجانية ومقالات تقنية</title>
-  <meta name="description" content="أكبر منصة عربية للأدوات المجانية والمقالات التقنية. {len(db['tools'])} أداة و{len(db['articles'])} مقال في مجالات التقنية والمال والأعمال.">
-  <meta name="keywords" content="أدوات مجانية, مقالات تقنية, SEO, أدوات مطورين, تحويل ملفات, حاسبات, أدوات تصميم">
-  <meta name="author" content="Empire Web">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://yourusername.github.io/repo-name/">
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="./sitemap.xml">
-  <meta property="og:title" content="إمبراطورية الويب | 500+ أداة مجانية">
-  <meta property="og:description" content="منصة شاملة للأدوات المجانية والمحتوى التقني">
-  <meta property="og:type" content="website">
-  <style>
-    :root {{ --bg: #0f172a; --surface: #1e293b; --primary: #38bdf8; --accent: #fbbf24; --text: #e2e8f0; --muted: #94a3b8; }}
-    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-    body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }}
-    header {{ background: linear-gradient(135deg, #1e293b, #0f172a); padding: 40px 20px; text-align: center; border-bottom: 1px solid #334155; }}
-    header h1 {{ font-size: 2.2rem; color: var(--primary); margin-bottom: 10px; }}
-    header p {{ color: var(--muted); font-size: 1.1rem; }}
-    .stats {{ display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }}
-    .stat {{ background: var(--surface); padding: 10px 20px; border-radius: 8px; border: 1px solid #334155; }}
-    .stat span {{ color: var(--accent); font-weight: bold; font-size: 1.2rem; }}
-    nav {{ background: var(--surface); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #334155; }}
-    nav button {{ background: transparent; border: 1px solid #475569; color: var(--text); padding: 8px 24px; margin: 0 5px; border-radius: 6px; cursor: pointer; transition: all 0.3s; }}
-    nav button:hover, nav button.active {{ background: var(--primary); color: #0f172a; border-color: var(--primary); }}
-    .search-box {{ max-width: 600px; margin: 30px auto; padding: 0 20px; }}
-    .search-box input {{ width: 100%; padding: 14px 20px; border-radius: 10px; border: 1px solid #475569; background
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 800px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+textarea {{ width: 100%; height: 120px; background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-family: monospace; }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 5px; }}
+.output {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-top: 15px; white-space: pre-wrap; font-family: monospace; word-break: break-all; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔧 {name}</h1>
+<p>{desc}</p>
+<textarea id="input" placeholder="أدخل النص أو الرابط هنا..."></textarea><br>
+<button class="btn" onclick="enc()">تشفير URL Encode</button>
+<button class="btn" onclick="dec()">فك تشفير URL Decode</button>
+<button class="btn" onclick="copyOut()">نسخ</button>
+<div id="output" class="output">النتيجة تظهر هنا...</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+function enc() {{ document.getElementById('output').textContent = encodeURIComponent(document.getElementById('input').value); }}
+function dec() {{ document.getElementById('output').textContent = decodeURIComponent(document.getElementById('input').value); }}
+function copyOut() {{ navigator.clipboard.writeText(document.getElementById('output').textContent).then(() => alert('تم النسخ!')); }}
+</script>
+</body>
+</html>'''
+
+def tool_password_generator(name, desc):
+    return f'''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 700px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+.controls {{ background: #1e293b; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #334155; }}
+label {{ display: block; margin: 10px 0; }}
+input[type="number"], input[type="text"] {{ background: #0f172a; color: #e2e8f0; border: 1px solid #334155; padding: 8px; border-radius: 6px; width: 80px; }}
+input[type="checkbox"] {{ margin-left: 8px; transform: scale(1.2); }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 12px 32px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1.1rem; }}
+.btn:hover {{ background: #0ea5e9; }}
+.output {{ background: #1e293b; border: 2px solid #38bdf8; border-radius: 8px; padding: 16px; margin-top: 20px; font-family: monospace; font-size: 1.3rem; text-align: center; word-break: break-all; }}
+.strength {{ margin-top: 10px; padding: 8px; border-radius: 6px; text-align: center; font-weight: bold; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔐 {name}</h1>
+<p>{desc}</p>
+<div class="controls">
+<label>الطول: <input type="number" id="len" value="16" min="4" max="128"></label>
+<label><input type="checkbox" id="upper" checked> أحرف كبيرة (A-Z)</label>
+<label><input type="checkbox" id="lower" checked> أحرف صغيرة (a-z)</label>
+<label><input type="checkbox" id="nums" checked> أرقام (0-9)</label>
+<label><input type="checkbox" id="symb" checked> رموز (!@#$...)</label>
+<button class="btn" onclick="gen()">توليد كلمة مرور</button>
+</div>
+<div id="output" class="output">اضغط "توليد" لإنشاء كلمة مرور</div>
+<div id="strength" class="strength"></div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+function gen() {{
+  const len = parseInt(document.getElementById('len').value);
+  const u = document.getElementById('upper').checked;
+  const l = document.getElementById('lower').checked;
+  const n = document.getElementById('nums').checked;
+  const s = document.getElementById('symb').checked;
+  let chars = '';
+  if (u) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (l) chars += 'abcdefghijklmnopqrstuvwxyz';
+  if (n) chars += '0123456789';
+  if (s) chars += '!@#$%^&*()_+-=[]{{}}|;:,.<>?';
+  if (!chars) {{ alert('اختر نوعاً واحداً على الأقل'); return; }}
+  let pass = '';
+  for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+  document.getElementById('output').textContent = pass;
+  navigator.clipboard.writeText(pass);
+  // Strength
+  let score = 0;
+  if (len >= 12) score++; if (len >= 16) score++;
+  if (u && l) score++; if (n) score++; if (s) score++;
+  const el = document.getElementById('strength');
+  const labels = ['ضعيفة جداً', 'ضعيفة', 'متوسطة', 'قوية', 'قوية جداً', 'ممتازة'];
+  const colors = ['#ef4444','#f97316','#eab308','#84cc16','#22c55e','#10b981'];
+  el.textContent = 'القوة: ' + labels[score];
+  el.style.background = colors[score] + '22';
+  el.style.color = colors[score];
+}}
+</script>
+</body>
+</html>'''
+
+def tool_color_converter(name, desc):
+    return f'''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 700px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+input {{ background: #1e293b; color: #e2e8f0; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 200px; margin: 5px; }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 5px; }}
+.preview {{ width: 100%; height: 100px; border-radius: 12px; margin: 20px 0; border: 2px solid #334155; transition: background 0.3s; }}
+.output {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; margin-top: 15px; font-family: monospace; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎨 {name}</h1>
+<p>{desc}</p>
+<div>
+<input id="hex" placeholder="#38bdf8" oninput="fromHex()">
+<input id="rgb" placeholder="rgb(56,189,248)" oninput="fromRgb()">
+<input id="hsl" placeholder="hsl(199,89%,60%)" oninput="fromHsl()">
+</div>
+<div id="preview" class="preview" style="background:#38bdf8;"></div>
+<div id="output" class="output">
+HEX: #38bdf8<br>
+RGB: rgb(56, 189, 248)<br>
+HSL: hsl(199, 89%, 60%)
+</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+function fromHex() {{
+  let h = document.getElementById('hex').value.trim();
+  if (!h.match(/^#/)) h = '#' + h;
+  if (!/^#[0-9A-Fa-f]{{6}}$/.test(h)) return;
+  const r = parseInt(h.slice(1,3),16), g = parseInt(h.slice(3,5),16), b = parseInt(h.slice(5,7),16);
+  update(r,g,b,h);
+}}
+function fromRgb() {{
+  const m = document.getElementById('rgb').value.match(/(\\d+),\\s*(\\d+),\\s*(\\d+)/);
+  if (!m) return;
+  update(parseInt(m[1]), parseInt(m[2]), parseInt(m[3]));
+}}
+function fromHsl() {{
+  const m = document.getElementById('hsl').value.match(/(\\d+),\\s*(\\d+)%,\\s*(\\d+)%/);
+  if (!m) return;
+  let h=parseInt(m[1])/360, s=parseInt(m[2])/100, l=parseInt(m[3])/100;
+  let r,g,b;
+  if (s === 0) {{ r = g = b = l; }} else {{
+    const hue2rgb = (p,q,t) => {{ if(t<0) t+=1; if(t>1) t-=1; if(t<1/6) return p+(q-p)*6*t; if(t<1/2) return q; if(t<2/3) return p+(q-p)*(2/3-t)*6; return p; }};
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1/3); g = hue2rgb(p, q, h); b = hue2rgb(p, q, h - 1/3);
+  }}
+  update(Math.round(r*255), Math.round(g*255), Math.round(b*255));
+}}
+function update(r,g,b,hex=null) {{
+  const h = hex || '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+  const hsl = rgbToHsl(r,g,b);
+  document.getElementById('hex').value = h;
+  document.getElementById('rgb').value = `rgb(${{r}}, ${{g}}, ${{b}})`;
+  document.getElementById('hsl').value = `hsl(${{hsl.h}}, ${{hsl.s}}%, ${{hsl.l}}%)`;
+  document.getElementById('preview').style.background = h;
+  document.getElementById('output').innerHTML = `HEX: ${{h}}<br>RGB: rgb(${{r}}, ${{g}}, ${{b}})<br>HSL: hsl(${{hsl.h}}, ${{hsl.s}}%, ${{hsl.l}}%)`;
+}}
+function rgbToHsl(r,g,b) {{
+  r/=255; g/=255; b/=255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b);
+  let h,s,l=(max+min)/2;
+  if (max===min) {{ h=s=0; }} else {{
+    const d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
+    switch(max){{ case r:h=(g-b)/d+(g<b?6:0);break; case g:h=(b-r)/d+2;break; case b:h=(r-g)/d+4;break; }}
+    h/=6;
+  }}
+  return {{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)}};
+}}
+</script>
+</body>
+</html>'''
+
+def tool_unit_converter(name, desc):
+    return f'''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 700px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+select, input {{ background: #1e293b; color: #e2e8f0; border: 1px solid #334155; padding: 10px; border-radius: 6px; margin: 5px; font-size: 1rem; }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; }}
+.output {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 20px; margin-top: 20px; font-size: 1.2rem; text-align: center; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📏 {name}</h1>
+<p>{desc}</p>
+<div>
+<input type="number" id="val" value="1" step="any">
+<select id="from">
+<option value="m">متر (m)</option><option value="km">كيلومتر (km)</option><option value="cm">سنتيمتر (cm)</option>
+<option value="mm">مليمتر (mm)</option><option value="ft">قدم (ft)</option><option value="in">بوصة (in)</option>
+<option value="yd">ياردة (yd)</option><option value="mi">ميل (mi)</option>
+</select>
+<select id="to">
+<option value="km">كيلومتر (km)</option><option value="m" selected>متر (m)</option><option value="cm">سنتيمتر (cm)</option>
+<option value="mm">مليمتر (mm)</option><option value="ft">قدم (ft)</option><option value="in">بوصة (in)</option>
+<option value="yd">ياردة (yd)</option><option value="mi">ميل (mi)</option>
+</select>
+<button class="btn" onclick="convert()">تحويل</button>
+</div>
+<div id="output" class="output">أدخل قيمة واضغط تحويل</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+const rates = {{ m:1, km:1000, cm:0.01, mm:0.001, ft:0.3048, in:0.0254, yd:0.9144, mi:1609.34 }};
+function convert() {{
+  const v = parseFloat(document.getElementById('val').value);
+  const f = document.getElementById('from').value;
+  const t = document.getElementById('to').value;
+  if (isNaN(v)) {{ document.getElementById('output').textContent = 'أدخل رقماً صحيحاً'; return; }}
+  const m = v * rates[f];
+  const res = m / rates[t];
+  document.getElementById('output').textContent = v + ' ' + f + ' = ' + res.toFixed(6) + ' ' + t;
+}}
+</script>
+</body>
+</html>'''
+
+def tool_word_counter(name, desc):
+    return f'''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 800px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+textarea {{ width: 100%; height: 250px; background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-size: 1rem; }}
+.stats {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }}
+.stat-box {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; text-align: center; }}
+.stat-box .num {{ font-size: 2rem; font-weight: bold; color: #38bdf8; }}
+.stat-box .label {{ color: #94a3b8; font-size: 0.9rem; margin-top: 5px; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📝 {name}</h1>
+<p>{desc}</p>
+<textarea id="text" placeholder="اكتب أو الصق النص هنا..." oninput="count()"></textarea>
+<div class="stats">
+<div class="stat-box"><div class="num" id="words">0</div><div class="label">كلمات</div></div>
+<div class="stat-box"><div class="num" id="chars">0</div><div class="label">أحرف</div></div>
+<div class="stat-box"><div class="num" id="charsNoSpace">0</div><div class="label">بدون مسافات</div></div>
+<div class="stat-box"><div class="num" id="sentences">0</div><div class="label">جمل</div></div>
+<div class="stat-box"><div class="num" id="paragraphs">0</div><div class="label">فقرات</div></div>
+<div class="stat-box"><div class="num" id="reading">0</div><div class="label">دقيقة قراءة</div></div>
+</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+function count() {{
+  const t = document.getElementById('text').value;
+  document.getElementById('chars').textContent = t.length;
+  document.getElementById('charsNoSpace').textContent = t.replace(/\\s/g, '').length;
+  const words = t.trim() === '' ? 0 : t.trim().split(/\\s+/).length;
+  document.getElementById('words').textContent = words;
+  const sentences = t.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+  document.getElementById('sentences').textContent = sentences;
+  const paragraphs = t.split('\\n').filter(p => p.trim().length > 0).length;
+  document.getElementById('paragraphs').textContent = paragraphs;
+  document.getElementById('reading').textContent = Math.ceil(words / 200) || 0;
+}}
+</script>
+</body>
+</html>'''
+
+def tool_lorem_ipsum(name, desc):
+    return f'''<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>{name}</title>
+<style>
+body {{ font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; padding: 20px; }}
+.container {{ max-width: 800px; margin: 0 auto; }}
+h1 {{ color: #38bdf8; }}
+.controls {{ background: #1e293b; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #334155; }}
+label {{ display: inline-block; margin: 8px 15px; }}
+input[type="number"] {{ background: #0f172a; color: #e2e8f0; border: 1px solid #334155; padding: 6px; border-radius: 6px; width: 70px; }}
+.btn {{ background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 5px; }}
+.output {{ background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 16px; margin-top: 15px; line-height: 1.8; }}
+.ad {{ background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 12px; text-align: center; margin: 30px 0; border: 1px solid #475569; }}
+.ad a {{ color: #fbbf24; text-decoration: none; font-weight: bold; }}
+.back {{ color: #94a3b8; text-decoration: none; }}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>✍️ {name}</h1>
+<p>{desc}</p>
+<div class="controls">
+<label>فقرات: <input type="number" id="paras" value="3" min="1" max="50"></label>
+<label>كلمات/فقرة: <input type="number" id="words" value="50" min="10" max="200"></label>
+<label><input type="checkbox" id="html" checked> تضمين HTML</label>
+<button class="btn" onclick="generate()">توليد</button>
+<button class="btn" onclick="copyOut()">نسخ</button>
+</div>
+<div id="output" class="output">اضغط "توليد" لإنشاء نص...</div>
+<div class="ad">
+<p>🚀 اكتشف المزيد من الأدوات</p>
+<a href="{AD_LINK}" target="_blank" rel="nofollow noopener">اضغط هنا للاستفادة من العرض المميز</a>
+</div>
+<a href="../index.html" class="back">← العودة للرئيسية</a>
+</div>
+<script>
+const words = ["لوريم","إيبسوم","دولار","سيت","أميت","كونسيكتيتور","أدايبيسيسينغ","إيليت","سيد","دو","إيوسمود","تيمبور","إنكيديدونت","يوت","لابور","إت","دولور","ماغنا","أليكا","يوت","إنيم","أد","مينيم","فينيام","كويس","نوسترود","إكسيرسيتاشين","يوللامكو","لابوريس","نيسي","يوت","أليكوب","إكس","إي","كومودو","كونسيكوات","دويس","أوتي","إيرور","دولور","إن","ريبرهينديريت","إن","فولوبتاتي","فيليت","إيسي","سيلوم","دولوري","يو","فيغيات","نولا","بارياتور","إكسيبتيور","سينت","أوكايكات","كيوبيداتات","نون","برويدينت","س
