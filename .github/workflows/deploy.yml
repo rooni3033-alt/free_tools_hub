@@ -1,37 +1,106 @@
-# Empire Web — Global Auto Deploy Pipeline
-# Automatically generates tools (up to 500) + infinite articles every 3 hours
-
-name: Empire Auto Build & Deploy
+name: Global Tools Auto Build
 
 on:
-  schedule:
-    - cron: '0 */3 * * *'
   workflow_dispatch:
+
+  schedule:
+    # كل 3 ساعات
+    - cron: "0 */3 * * *"
 
 permissions:
   contents: write
 
+concurrency:
+  group: empire-auto-build
+  cancel-in-progress: false
+
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+
+      # 1. تحميل المشروع
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # 2. تثبيت Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
+          cache: "pip"
 
-      - name: Generate Tools & Articles
-        run: python main.py
+      # 3. تشغيل محرك الموقع
+      - name: Run Empire Web Engine
+        run: |
+          python main.py
 
-      - name: Commit and Push
+      # 4. التأكد من وجود الملفات الأساسية
+      - name: Verify build
+        run: |
+          echo "===== BUILD CHECK ====="
+
+          test -f main.py || exit 1
+          test -f index.html || echo "index.html not found - continuing"
+
+          if [ -d "tools" ]; then
+            echo "Tools generated:"
+            find tools -type f -name "*.html" | wc -l
+          else
+            echo "No tools directory found"
+          fi
+
+          if [ -d "articles" ]; then
+            echo "Articles generated:"
+            find articles -type f -name "*.html" | wc -l
+          else
+            echo "No articles directory found"
+          fi
+
+      # 5. إنشاء Sitemap إذا كان سكربتك يدعمه
+      - name: Check sitemap
+        run: |
+          if [ -f "sitemap.xml" ]; then
+            echo "Sitemap exists"
+          else
+            echo "Sitemap will be handled by the project"
+          fi
+
+      # 6. حفظ الملفات الجديدة في GitHub
+      - name: Commit generated content
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add -A
-          git diff --cached --quiet || (git commit -m "🤖 Auto build [$(date -u +'%Y-%m-%d %H:%M UTC')]" && git push)
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "🤖 Auto build $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
+
+      # 7. إظهار إحصائيات البناء
+      - name: Build statistics
+        run: |
+          echo "======================================"
+          echo "        GLOBAL TOOLS BUILD"
+          echo "======================================"
+
+          if [ -d "tools" ]; then
+            echo "Tools:"
+            find tools -type f -name "*.html" | wc -l
+          fi
+
+          if [ -d "articles" ]; then
+            echo "Articles:"
+            find articles -type f -name "*.html" | wc -l
+          fi
+
+          echo "======================================"
+          echo "BUILD COMPLETE"
+          echo "======================================"
