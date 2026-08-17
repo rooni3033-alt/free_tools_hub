@@ -1,765 +1,1384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empire Web | 500+ Free Tools & Tech Articles</title>
-  <meta name="description" content="The ultimate free utility hub with 500+ working tools and infinite tech articles. SEO, Developer, Design, Security, Calculators & Converters.">
-  <meta name="keywords" content="free tools, online utilities, SEO tools, developer tools, calculators, converters, tech articles, free apps">
-  <meta name="author" content="Empire Web">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="./index.html">
-  
-  <!-- Open Graph / International -->
-  <meta property="og:title" content="Empire Web | 500+ Free Tools & Infinite Articles">
-  <meta property="og:description" content="Free online tools hub: JSON, Base64, Password Generator, Color Converter, Unit Converter, Word Counter, QR Maker, and 500+ more.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:locale:alternate" content="ar_SA">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Empire Web | 500+ Free Online Tools">
-  <meta name="twitter:description" content="Real working tools: converters, calculators, generators, formatters. No signup required.">
-  
-  <!-- Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <style>
-    :root {
-      --bg: #0b1120;
-      --surface: #151e32;
-      --surface-hover: #1e293b;
-      --primary: #38bdf8;
-      --primary-dark: #0ea5e9;
-      --accent: #f59e0b;
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --border: #334155;
-      --success: #10b981;
-      --danger: #ef4444;
-      --radius: 12px;
-      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.2);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FreeTools Hub — 1000+ Free Online Tools</title>
+
+<meta name="description"
+content="Free online tools for developers, designers, students, marketers and businesses. Calculators, converters, generators, SEO tools and more. No signup required.">
+
+<meta name="keywords"
+content="free online tools, developer tools, calculators, converters, SEO tools, text tools, image tools, productivity tools">
+
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<link rel="canonical" href="./">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="FreeTools Hub — Free Online Tools">
+<meta property="og:description" content="Hundreds of useful free online tools. Fast, simple and free.">
+<meta property="og:url" content="./">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FreeTools Hub — Free Online Tools">
+<meta name="twitter:description" content="Free online tools for everyone.">
+
+<style>
+
+:root{
+    --bg:#07111f;
+    --bg2:#0b1628;
+    --surface:#101d31;
+    --surface2:#14243b;
+    --primary:#38bdf8;
+    --primary2:#0ea5e9;
+    --accent:#f59e0b;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#243650;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --radius:16px;
+    --shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%,rgba(56,189,248,.12),transparent 30%),
+        radial-gradient(circle at 80% 10%,rgba(245,158,11,.08),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    min-height:100vh;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+/* HEADER */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(18px);
+    background:rgba(7,17,31,.86);
+    border-bottom:1px solid rgba(148,163,184,.12);
+}
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1.25rem;
+    font-weight:900;
+}
+
+.logo-icon{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--primary),#818cf8);
+    color:#00111f;
+    font-weight:900;
+}
+
+.logo span{
+    color:var(--primary);
+}
+
+.nav-links{
+    display:flex;
+    gap:22px;
+    color:var(--muted);
+    font-size:.92rem;
+}
+
+.nav-links a:hover{
+    color:var(--primary);
+}
+
+/* HERO */
+
+.hero{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+    padding:80px 20px 55px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 14px;
+    border:1px solid rgba(56,189,248,.25);
+    background:rgba(56,189,248,.08);
+    border-radius:999px;
+    color:var(--primary);
+    font-size:.82rem;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.badge-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--success);
+    box-shadow:0 0 12px var(--success);
+}
+
+.hero h1{
+    font-size:clamp(2.2rem,6vw,4.5rem);
+    line-height:1.05;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    background:linear-gradient(90deg,#38bdf8,#818cf8,#f59e0b);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:var(--muted);
+    font-size:1.1rem;
+}
+
+/* SEARCH */
+
+.search-wrap{
+    max-width:800px;
+    margin:30px auto 0;
+    position:relative;
+}
+
+.search{
+    width:100%;
+    padding:18px 55px 18px 20px;
+    background:rgba(16,29,49,.95);
+    border:1px solid var(--border);
+    border-radius:14px;
+    color:var(--text);
+    outline:none;
+    font-size:1rem;
+    box-shadow:var(--shadow);
+}
+
+.search:focus{
+    border-color:var(--primary);
+    box-shadow:
+        0 0 0 4px rgba(56,189,248,.08),
+        var(--shadow);
+}
+
+.search-icon{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+    pointer-events:none;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px 70px;
+}
+
+/* AD */
+
+.ad-box{
+    max-width:900px;
+    margin:20px auto 45px;
+    padding:18px 22px;
+    border:1px solid rgba(245,158,11,.18);
+    background:rgba(245,158,11,.045);
+    border-radius:14px;
+    text-align:center;
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+.ad-box-label{
+    display:block;
+    color:#64748b;
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:7px;
+}
+
+.ad-box a{
+    color:var(--accent);
+    font-weight:800;
+}
+
+.ad-box a:hover{
+    text-decoration:underline;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:35px;
+}
+
+.stat{
+    padding:20px;
+    background:rgba(16,29,49,.72);
+    border:1px solid var(--border);
+    border-radius:14px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:1.6rem;
+    color:var(--primary);
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:.82rem;
+}
+
+/* SECTION */
+
+.section-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.section-head h2{
+    font-size:1.5rem;
+}
+
+.section-head p{
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-bottom:35px;
+}
+
+.category-btn{
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--muted);
+    padding:9px 15px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.category-btn:hover,
+.category-btn.active{
+    background:rgba(56,189,248,.1);
+    color:var(--primary);
+    border-color:rgba(56,189,248,.35);
+}
+
+/* TOOLS */
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.tool-card{
+    display:flex;
+    flex-direction:column;
+    min-height:190px;
+    padding:20px;
+    background:linear-gradient(
+        145deg,
+        rgba(16,29,49,.95),
+        rgba(11,22,40,.95)
+    );
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    transition:
+        transform .2s,
+        border-color .2s,
+        box-shadow .2s;
+}
+
+.tool-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(56,189,248,.4);
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+
+.tool-icon{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:rgba(56,189,248,.1);
+    color:var(--primary);
+    margin-bottom:14px;
+    font-weight:900;
+}
+
+.tool-card h3{
+    font-size:1rem;
+    margin-bottom:7px;
+}
+
+.tool-card p{
+    color:var(--muted);
+    font-size:.82rem;
+    line-height:1.5;
+    flex:1;
+}
+
+.tool-category{
+    display:inline-block;
+    color:var(--primary);
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    margin-top:14px;
+    margin-bottom:10px;
+}
+
+.open-tool{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:9px 12px;
+    border-radius:9px;
+    background:var(--primary);
+    color:#03131f;
+    font-size:.8rem;
+    font-weight:800;
+}
+
+.open-tool:hover{
+    background:#7dd3fc;
+}
+
+/* PAGINATION */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:40px 0;
+}
+
+.page-btn{
+    min-width:42px;
+    padding:9px 12px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--muted);
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.page-btn:hover,
+.page-btn.active{
+    background:var(--primary);
+    color:#03131f;
+}
+
+/* ARTICLES */
+
+.articles{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.article{
+    padding:22px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:14px;
+}
+
+.article small{
+    color:var(--primary);
+}
+
+.article h3{
+    margin:10px 0;
+    font-size:1rem;
+}
+
+.article p{
+    color:var(--muted);
+    font-size:.84rem;
+}
+
+/* EMPTY */
+
+.empty{
+    display:none;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--muted);
+}
+
+.empty strong{
+    display:block;
+    color:var(--text);
+    font-size:1.2rem;
+    margin-bottom:8px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    margin-top:40px;
+    padding:35px 20px;
+    color:var(--muted);
+}
+
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.footer-links{
+    display:flex;
+    gap:18px;
+}
+
+.footer-links a:hover{
+    color:var(--primary);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+    .tools-grid{
+        grid-template-columns:repeat(3,1fr);
     }
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    @font-face {
-      font-family: 'System UI';
-      src: local('Segoe UI'), local('Roboto'), local('Helvetica Neue'), local('Arial'), local('Noto Sans');
-      font-display: swap;
+}
+
+@media(max-width:760px){
+
+    .nav-links{
+        display:none;
     }
-    
-    html { scroll-behavior: smooth; }
-    
-    body {
-      font-family: 'System UI', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
+
+    .hero{
+        padding-top:55px;
     }
-    
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      padding: 60px 20px 50px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
-    
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 60%);
-      pointer-events: none;
+
+    .tools-grid{
+        grid-template-columns:repeat(2,1fr);
     }
-    
-    header h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--primary);
-      margin-bottom: 12px;
-      font-weight: 800;
-      letter-spacing: -1px;
+
+    .articles{
+        grid-template-columns:1fr;
     }
-    
-    header p {
-      color: var(--muted);
-      font-size: 1.15rem;
-      max-width: 650px;
-      margin: 0 auto;
-      line-height: 1.6;
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:2.25rem;
     }
-    
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
-      flex-wrap: wrap;
+
+    .tools-grid{
+        grid-template-columns:1fr;
     }
-    
-    .stat {
-      background: var(--surface);
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      font-size: 0.95rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      min-width: 140px;
+
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
-    
-    .stat:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .stat span { color: var(--accent); font-weight: 800; font-size: 1.5rem; display: block; line-height: 1.2; }
-    .stat label { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-    /* Ad Banner Top */
-    .ad-top {
-      background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.03));
-      border: 1px solid rgba(245,158,11,0.25);
-      border-radius: var(--radius);
-      padding: 16px 24px;
-      text-align: center;
-      max-width: 700px;
-      margin: 20px auto 0;
-      position: relative;
+
+    .container{
+        padding-left:14px;
+        padding-right:14px;
     }
-    
-    .ad-top::after {
-      content: 'AD';
-      position: absolute;
-      top: 8px;
-      left: 12px;
-      background: rgba(245,158,11,0.15);
-      color: var(--accent);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    
-    .ad-top a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05rem;
-      transition: opacity 0.2s;
-    }
-    
-    .ad-top a:hover { opacity: 0.85; text-decoration: underline; }
-    
-    /* Navigation */
-    nav {
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      padding: 16px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    
-    nav button {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 10px 28px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      font-size: 1rem;
-      font-weight: 600;
-      font-family: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    nav button:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: rgba(56,189,248,0.05);
-    }
-    
-    nav button.active {
-      background: var(--primary);
-      color: #0f172a;
-      border-color: var(--primary);
-      box-shadow: 0 0 20px rgba(56,189,248,0.25);
-    }
-    
-    /* Search */
-    .search-section {
-      max-width: 720px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    
-    .search-box {
-      position: relative;
-    }
-    
-    .search-box input {
-      width: 100%;
-      padding: 18px 60px 18px 24px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 1.05rem;
-      font-family: inherit;
-      transition: all 0.3s;
-      outline: none;
-    }
-    
-    .search-box input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(56,189,248,0.12);
-    }
-    
-    .search-box input::placeholder { color: #64748b; }
-    
-    .search-icon {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 1.3rem;
-      pointer-events: none;
-    }
-    
-    .search-hint {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-top: 10px;
-    }
-    
-    /* Content */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .section-title {
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-    }
-    
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
-    }
-    
-    .card:hover::before { opacity: 1; }
-    
-    .card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(56,189,248,0.08);
-      color: var(--primary);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      width: fit-content;
-      border: 1px solid rgba(56,189,248,0.15);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 10px;
-      color: var(--text);
-      line-height: 1.35;
-      font-weight: 700;
-    }
-    
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      flex-grow: 1;
-      margin-bottom: 18px;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-      transition: gap 0.2s;
-      margin-top: auto;
-    }
-    
-    .card-link:hover { gap: 10px; color: var(--primary-dark); }
-    
-    .card-meta {
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-bottom: 12px;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    
-    .card-meta span { display: inline-flex; align-items: center; gap: 4px; }
-    
-    /* Ad Banner Bottom */
-    .ad-banner {
-      background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02));
-      border: 1px solid rgba(245,158,11,0.2);
-      border-radius: var(--radius);
-      padding: 28px;
-      text-align: center;
-      margin: 40px 0;
-      position: relative;
-    }
-    
-    .ad-banner::after {
-      content: 'ADVERTISEMENT';
-      position: absolute;
-      top: 10px;
-      left: 14px;
-      background: rgba(245,158,11,0.12);
-      color: var(--accent);
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-size: 0.6rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-    
-    .ad-banner p {
-      color: var(--muted);
-      margin-bottom: 12px;
-      font-size: 1rem;
-    }
-    
-    .ad-banner a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 1.15rem;
-      display: inline-block;
-      padding: 12px 32px;
-      background: rgba(245,158,11,0.1);
-      border-radius: 8px;
-      border: 1px solid rgba(245,158,11,0.3);
-      transition: all 0.3s;
-    }
-    
-    .ad-banner a:hover {
-      background: rgba(245,158,11,0.18);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px -5px rgba(245,158,11,0.2);
-    }
-    
-    /* States */
-    .loading, .error, .empty {
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--muted);
-      grid-column: 1 / -1;
-    }
-    
-    .loading::after {
-      content: '';
-      display: block;
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      margin: 16px auto 0;
-      animation: spin 0.8s linear infinite;
-    }
-    
-    @keyframes spin { to { transform: rotate(360deg); } }
-    
-    .error { color: var(--danger); }
-    .error::before { content: '⚠️ '; }
-    
-    .empty::before { content: '🔍 '; }
-    
-    .hidden { display: none !important; }
-    
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 50px 20px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-      font-size: 0.9rem;
-    }
-    
-    footer a { color: var(--primary); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    
-    /* Responsive */
-    @media (max-width: 640px) {
-      .grid { grid-template-columns: 1fr; }
-      .stats { gap: 10px; }
-      .stat { padding: 12px 20px; min-width: 120px; }
-      nav button { padding: 8px 18px; font-size: 0.9rem; }
-      header { padding: 40px 20px 30px; }
-    }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    
-    /* Selection */
-    ::selection { background: rgba(56,189,248,0.3); color: var(--text); }
-  </style>
+}
+
+</style>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"FreeTools Hub",
+  "description":"Free online tools for developers, designers, marketers, students and businesses.",
+  "url":"./",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"./?q={search_term_string}",
+    "query-input":"required name=search_term_string"
+  }
+}
+</script>
+
 </head>
+
 <body>
 
-  <header>
-    <h1>⚡ Empire Web</h1>
-    <p>The world's largest free utility hub. 500+ real working tools and infinite tech articles for developers, designers, marketers, and entrepreneurs.</p>
-    
-    <div class="ad-top">
-      <a href="https://omg10.com/4/11349784" target="_blank" rel="nofollow noopener">🚀 Discover Premium Tools & Exclusive Deals — Click Here</a>
+<header class="header">
+
+<nav class="nav">
+
+<a href="./" class="logo">
+    <div class="logo-icon">FT</div>
+    <div>Free<span>Tools</span> Hub</div>
+</a>
+
+<div class="nav-links">
+    <a href="#tools">Tools</a>
+    <a href="#categories">Categories</a>
+    <a href="#articles">Articles</a>
+</div>
+
+</nav>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+<div class="badge">
+    <span class="badge-dot"></span>
+    Free • Fast • No Signup
+</div>
+
+<h1>
+    Powerful <span>Free Online Tools</span><br>
+    for Everyone
+</h1>
+
+<p>
+    Convert, calculate, generate, analyze and optimize —
+    hundreds of useful tools designed for developers,
+    designers, marketers, students and businesses.
+</p>
+
+<div class="search-wrap">
+
+<input
+    id="search"
+    class="search"
+    type="search"
+    autocomplete="off"
+    placeholder="Search tools... e.g. JSON, PDF, calculator, SEO"
+>
+
+<div class="search-icon">⌕</div>
+
+</div>
+
+</section>
+
+
+<div class="container">
+
+
+<div class="ad-box">
+
+<span class="ad-box-label">Advertisement</span>
+
+<a
+href="https://omg10.com/4/11349784"
+target="_blank"
+rel="nofollow sponsored noopener"
+>
+Discover useful offers & premium resources →
+</a>
+
+</div>
+
+
+<section class="stats">
+
+<div class="stat">
+    <strong id="toolCount">0</strong>
+    <span>Free Tools</span>
+</div>
+
+<div class="stat">
+    <strong>100%</strong>
+    <span>Free to Use</span>
+</div>
+
+<div class="stat">
+    <strong>24/7</strong>
+    <span>Available</span>
+</div>
+
+<div class="stat">
+    <strong>Global</strong>
+    <span>Worldwide</span>
+</div>
+
+</section>
+
+
+<section id="categories">
+
+<div class="section-head">
+    <div>
+        <h2>Explore Categories</h2>
+        <p>Find the right tool for your task.</p>
     </div>
-    
-    <div class="stats">
-      <div class="stat"><span id="tool-count">0</span><label>Free Tools</label></div>
-      <div class="stat"><span id="article-count">0</span><label>Articles</label></div>
-      <div class="stat"><span id="total-count">0</span><label>Total Resources</label></div>
-    </div>
-  </header>
+</div>
 
-  <nav>
-    <div class="nav-inner">
-      <button class="active" onclick="switchTab('tools')" id="btn-tools" aria-label="Tools Section">
-        🔧 Tools
-      </button>
-      <button onclick="switchTab('articles')" id="btn-articles" aria-label="Articles Section">
-        📝 Blog
-      </button>
-    </div>
-  </nav>
+<div class="categories" id="categoriesList">
 
-  <div class="search-section">
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search tools and articles instantly..." autocomplete="off" aria-label="Search">
-    </div>
-    <div class="search-hint">Type a keyword to search across all tools and articles instantly • Press <kbd style="background:var(--surface);padding:2px 6px;border-radius:4px;border:1px solid var(--border);font-family:inherit;font-size:0.85rem">/</kbd> to focus</div>
-  </div>
+<button class="category-btn active" data-category="all">
+    All Tools
+</button>
 
-  <main>
-    <!-- Tools Section -->
-    <section id="tools-section" aria-labelledby="tools-heading">
-      <h2 class="section-title" id="tools-heading">🔧 Free Tools</h2>
-      <div id="tools-grid" class="grid">
-        <div class="loading">Loading tools from database...</div>
-      </div>
-    </section>
+</div>
 
-    <!-- Articles Section -->
-    <section id="articles-section" class="hidden" aria-labelledby="articles-heading">
-      <h2 class="section-title" id="articles-heading">📝 Latest Articles</h2>
-      <div id="articles-grid" class="grid">
-        <div class="loading">Loading articles from database...</div>
-      </div>
-    </section>
+</section>
 
-    <div class="ad-banner">
-      <p>💡 Boost your productivity with our curated tools and exclusive partner offers</p>
-      <a href="https://omg10.com/4/11349784" target="_blank" rel="nofollow noopener">Get Started with Premium Tools</a>
-    </div>
-  </main>
 
-  <footer>
-    <div class="footer-links">
-      <a href="./index.html">Home</a>
-      <a href="#" onclick="switchTab('tools'); return false;">Tools</a>
-      <a href="#" onclick="switchTab('articles'); return false;">Blog</a>
-    </div>
-    <p>Empire Web © <span id="year"></span> — Global Free Utility Hub</p>
-    <p style="margin-top:8px; font-size:0.8rem; color:#64748b;">Content auto-generated every 3 hours • All tools work 100% client-side</p>
-  </footer>
+<section id="tools">
 
-  <script>
-    // ===================== CONFIG =====================
-    const DB_PATH = './database.json';
-    const TOOLS_PATH = './tools/';
-    const ARTICLES_PATH = './articles/';
-    
-    let db = { tools: [], articles: [] };
-    let currentTab = 'tools';
-    
-    // ===================== INIT =====================
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('year').textContent = new Date().getFullYear();
-      loadDatabase();
-      
-      // Search handler with debounce
-      const searchInput = document.getElementById('searchInput');
-      let debounceTimer;
-      searchInput.addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => performSearch(e.target.value.trim()), 150);
-      });
-    });
-    
-    // ===================== DATA LOADING =====================
-    async function loadDatabase() {
-      try {
-        // Add cache-buster for fresh data
-        const response = await fetch(DB_PATH + '?v=' + Date.now());
-        if (!response.ok) throw new Error('Failed to load database.json');
-        
-        db = await response.json();
-        updateStats();
-        renderTools();
-        renderArticles();
-      } catch (err) {
-        console.error('Database load error:', err);
-        showError('tools-grid', 'Unable to load tools. Please ensure database.json exists and is valid.');
-        showError('articles-grid', 'Unable to load articles. Please ensure database.json exists and is valid.');
-      }
-    }
-    
-    function updateStats() {
-      const tCount = db.tools?.length || 0;
-      const aCount = db.articles?.length || 0;
-      
-      animateValue('tool-count', 0, tCount, 1000);
-      animateValue('article-count', 0, aCount, 1000);
-      animateValue('total-count', 0, tCount + aCount, 1200);
-    }
-    
-    function animateValue(id, start, end, duration) {
-      const obj = document.getElementById(id);
-      if (!obj) return;
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start);
-        if (progress < 1) window.requestAnimationFrame(step);
-      };
-      window.requestAnimationFrame(step);
-    }
-    
-    // ===================== RENDERING =====================
-    function renderTools(filter = '') {
-      const container = document.getElementById('tools-grid');
-      const tools = db.tools || [];
-      
-      const filtered = filter 
-        ? tools.filter(t => 
-            (t.name + ' ' + t.category + ' ' + t.description).toLowerCase().includes(filter.toLowerCase())
-          )
-        : tools;
-      
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="empty">${filter ? 'No tools match your search.' : 'No tools available yet. Run the generator first.'}</div>`;
-        return;
-      }
-      
-      container.innerHTML = filtered.map(tool => `
-        <article class="card" data-category="${escapeHtml(tool.category)}">
-          <span class="card-badge">${escapeHtml(tool.category)}</span>
-          <h3>${escapeHtml(tool.name)}</h3>
-          <p>${escapeHtml(tool.description)}</p>
-          <a href="${TOOLS_PATH}${tool.slug}.html" class="card-link">Open Tool →</a>
-        </article>
-      `).join('');
-    }
-    
-    function renderArticles(filter = '') {
-      const container = document.getElementById('articles-grid');
-      const articles = [...(db.articles || [])].reverse(); // Newest first
-      
-      const filtered = filter
-        ? articles.filter(a =>
-            (a.title + ' ' + a.topic + ' ' + a.category + ' ' + a.content).toLowerCase().includes(filter.toLowerCase())
-          )
-        : articles;
-      
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="empty">${filter ? 'No articles match your search.' : 'No articles available yet.'}</div>`;
-        return;
-      }
-      
-      container.innerHTML = filtered.map(article => `
-        <article class="card">
-          <div class="card-meta">
-            <span>📅 ${escapeHtml(article.date)}</span>
-            <span>🏷️ ${escapeHtml(article.category)}</span>
-          </div>
-          <h3>${escapeHtml(article.title)}</h3>
-          <p>${escapeHtml(article.content?.substring(0, 150) || '')}...</p>
-          <a href="${ARTICLES_PATH}${article.slug}.html" class="card-link">Read Article →</a>
-        </article>
-      `).join('');
-    }
-    
-    // ===================== TABS & SEARCH =====================
-    function switchTab(tab) {
-      currentTab = tab;
-      
-      // Update buttons
-      document.getElementById('btn-tools').classList.toggle('active', tab === 'tools');
-      document.getElementById('btn-articles').classList.toggle('active', tab === 'articles');
-      
-      // Update sections
-      document.getElementById('tools-section').classList.toggle('hidden', tab !== 'tools');
-      document.getElementById('articles-section').classList.toggle('hidden', tab !== 'articles');
-      
-      // Scroll to content
-      document.querySelector('main').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Re-apply search
-      const query = document.getElementById('searchInput').value.trim();
-      if (query) performSearch(query);
-    }
-    
-    function performSearch(query) {
-      if (!query) {
-        renderTools();
-        renderArticles();
-        return;
-      }
-      
-      const q = query.toLowerCase();
-      
-      // Search in both but highlight current tab
-      renderTools(q);
-      renderArticles(q);
-      
-      // Auto-switch if current tab is empty but other has results
-      const toolsHas = (db.tools || []).some(t => 
-        (t.name + ' ' + t.category + ' ' + t.description).toLowerCase().includes(q)
-      );
-      const artsHas = (db.articles || []).some(a => 
-        (a.title + ' ' + a.topic + ' ' + a.category + ' ' + a.content).toLowerCase().includes(q)
-      );
-      
-      if (currentTab === 'tools' && !toolsHas && artsHas) switchTab('articles');
-      else if (currentTab === 'articles' && !artsHas && toolsHas) switchTab('tools');
-    }
-    
-    // ===================== UTILITIES =====================
-    function escapeHtml(text) {
-      if (!text) return '';
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-    
-    function showError(elementId, message) {
-      document.getElementById(elementId).innerHTML = `<div class="error">${escapeHtml(message)}</div>`;
-    }
-    
-    // Keyboard shortcut: / to focus search
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        document.getElementById('searchInput').focus();
-      }
-      
-      // Escape to clear search
-      if (e.key === 'Escape') {
-        const input = document.getElementById('searchInput');
-        if (document.activeElement === input) {
-          input.value = '';
-          input.blur();
-          performSearch('');
+<div class="section-head">
+
+<div>
+    <h2>All Free Tools</h2>
+    <p id="resultText">Loading tools...</p>
+</div>
+
+</div>
+
+<div id="toolsGrid" class="tools-grid"></div>
+
+<div id="empty" class="empty">
+    <strong>No tools found</strong>
+    Try another search or category.
+</div>
+
+<div id="pagination" class="pagination"></div>
+
+</section>
+
+
+<section id="articles" style="margin-top:70px">
+
+<div class="section-head">
+
+<div>
+    <h2>Latest Guides</h2>
+    <p>Helpful articles and tutorials.</p>
+</div>
+
+</div>
+
+<div id="articlesGrid" class="articles"></div>
+
+</section>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer-inner">
+
+<div>
+    © <span id="year"></span> FreeTools Hub
+</div>
+
+<div class="footer-links">
+    <a href="./">Home</a>
+    <a href="#tools">Tools</a>
+    <a href="#articles">Guides</a>
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/*
+|--------------------------------------------------------------------------
+| FREE TOOLS HUB — GLOBAL FRONTEND
+|--------------------------------------------------------------------------
+*/
+
+const TOOLS_PER_PAGE = 24;
+
+let allTools = [];
+let allArticles = [];
+
+let filteredTools = [];
+
+let currentPage = 1;
+let currentCategory = "all";
+let currentSearch = "";
+
+
+/* ---------------------------------------------------------
+   LOAD DATABASE
+--------------------------------------------------------- */
+
+async function loadDatabase(){
+
+    try{
+
+        const response = await fetch("./database.json", {
+            cache:"no-store"
+        });
+
+        if(!response.ok){
+            throw new Error("Database unavailable");
         }
-      }
+
+        const db = await response.json();
+
+        allTools = Array.isArray(db.tools)
+            ? db.tools
+            : [];
+
+        allArticles = Array.isArray(db.articles)
+            ? db.articles
+            : [];
+
+        initialize();
+
+    }catch(error){
+
+        console.warn("database.json could not be loaded:", error);
+
+        /*
+        Fallback:
+        If database.json isn't available, create a small
+        starter set so the homepage does not look broken.
+        */
+
+        allTools = [
+            {
+                id:1,
+                slug:"tool-1",
+                name:"JSON Formatter",
+                category:"Developer",
+                description:"Format and validate JSON directly in your browser."
+            },
+            {
+                id:2,
+                slug:"tool-2",
+                name:"Base64 Encoder",
+                category:"Developer",
+                description:"Encode and decode Base64 text instantly."
+            },
+            {
+                id:3,
+                slug:"tool-3",
+                name:"Password Generator",
+                category:"Security",
+                description:"Generate strong random passwords."
+            },
+            {
+                id:4,
+                slug:"tool-4",
+                name:"Word Counter",
+                category:"Productivity",
+                description:"Count words, characters, sentences and paragraphs."
+            }
+        ];
+
+        allArticles = [];
+
+        initialize();
+    }
+}
+
+
+/* ---------------------------------------------------------
+   INITIALIZE
+--------------------------------------------------------- */
+
+function initialize(){
+
+    document.getElementById("toolCount").textContent =
+        allTools.length.toLocaleString();
+
+    buildCategories();
+
+    applyFilters();
+
+    renderArticles();
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+}
+
+
+/* ---------------------------------------------------------
+   CATEGORIES
+--------------------------------------------------------- */
+
+function buildCategories(){
+
+    const container =
+        document.getElementById("categoriesList");
+
+    const categories = [
+        ...new Set(
+            allTools
+                .map(tool => tool.category)
+                .filter(Boolean)
+        )
+    ].sort();
+
+    categories.forEach(category => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "category-btn";
+
+        button.dataset.category = category;
+
+        button.textContent = category;
+
+        button.addEventListener("click", () => {
+
+            currentCategory = category;
+
+            currentPage = 1;
+
+            document
+                .querySelectorAll(".category-btn")
+                .forEach(btn =>
+                    btn.classList.remove("active")
+                );
+
+            button.classList.add("active");
+
+            applyFilters();
+        });
+
+        container.appendChild(button);
     });
-  </script>
+}
+
+
+/* ---------------------------------------------------------
+   FILTER
+--------------------------------------------------------- */
+
+function applyFilters(){
+
+    const query =
+        currentSearch
+            .trim()
+            .toLowerCase();
+
+    filteredTools =
+        allTools.filter(tool => {
+
+            const matchesCategory =
+                currentCategory === "all" ||
+                tool.category === currentCategory;
+
+            const text = [
+                tool.name || "",
+                tool.description || "",
+                tool.category || ""
+            ]
+            .join(" ")
+            .toLowerCase();
+
+            const matchesSearch =
+                !query ||
+                text.includes(query);
+
+            return matchesCategory &&
+                   matchesSearch;
+        });
+
+    renderTools();
+}
+
+
+/* ---------------------------------------------------------
+   RENDER TOOLS
+--------------------------------------------------------- */
+
+function renderTools(){
+
+    const grid =
+        document.getElementById("toolsGrid");
+
+    const empty =
+        document.getElementById("empty");
+
+    grid.innerHTML = "";
+
+    const total =
+        filteredTools.length;
+
+    document.getElementById("resultText").textContent =
+        total.toLocaleString() +
+        " tool" +
+        (total === 1 ? "" : "s") +
+        " available";
+
+
+    if(total === 0){
+
+        empty.style.display = "block";
+
+        renderPagination();
+
+        return;
+    }
+
+    empty.style.display = "none";
+
+
+    const start =
+        (currentPage - 1) *
+        TOOLS_PER_PAGE;
+
+    const end =
+        start +
+        TOOLS_PER_PAGE;
+
+    const pageTools =
+        filteredTools.slice(start,end);
+
+
+    pageTools.forEach(tool => {
+
+        const card =
+            document.createElement("article");
+
+        card.className = "tool-card";
+
+
+        const name =
+            escapeHTML(tool.name || "Free Tool");
+
+        const description =
+            escapeHTML(
+                tool.description ||
+                `Free online ${tool.name || "utility"}.`
+            );
+
+        const category =
+            escapeHTML(tool.category || "Utility");
+
+
+        const slug =
+            tool.slug ||
+            `tool-${tool.id}`;
+
+
+        card.innerHTML = `
+
+            <div class="tool-icon">
+                ${getIcon(category)}
+            </div>
+
+            <span class="tool-category">
+                ${category}
+            </span>
+
+            <h3>${name}</h3>
+
+            <p>${description}</p>
+
+            <a
+                class="open-tool"
+                href="./tools/${encodeURIComponent(slug)}.html"
+            >
+                Open Tool →
+            </a>
+        `;
+
+        grid.appendChild(card);
+    });
+
+
+    renderPagination();
+}
+
+
+/* ---------------------------------------------------------
+   PAGINATION
+--------------------------------------------------------- */
+
+function renderPagination(){
+
+    const container =
+        document.getElementById("pagination");
+
+    container.innerHTML = "";
+
+    const pages =
+        Math.ceil(
+            filteredTools.length /
+            TOOLS_PER_PAGE
+        );
+
+    if(pages <= 1){
+        return;
+    }
+
+
+    const previous =
+        document.createElement("button");
+
+    previous.className = "page-btn";
+
+    previous.textContent = "←";
+
+    previous.disabled =
+        currentPage === 1;
+
+    previous.onclick = () => {
+
+        if(currentPage > 1){
+
+            currentPage--;
+
+            renderTools();
+
+            scrollToTools();
+        }
+    };
+
+    container.appendChild(previous);
+
+
+    const maxButtons = 7;
+
+    let start =
+        Math.max(
+            1,
+            currentPage -
+            Math.floor(maxButtons / 2)
+        );
+
+    let end =
+        Math.min(
+            pages,
+            start + maxButtons - 1
+        );
+
+    if(end - start < maxButtons - 1){
+
+        start =
+            Math.max(
+                1,
+                end - maxButtons + 1
+            );
+    }
+
+
+    for(let i=start;i<=end;i++){
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "page-btn" +
+            (i === currentPage
+                ? " active"
+                : "");
+
+        button.textContent = i;
+
+        button.onclick = () => {
+
+            currentPage = i;
+
+            renderTools();
+
+            scrollToTools();
+        };
+
+        container.appendChild(button);
+    }
+
+
+    const next =
+        document.createElement("button");
+
+    next.className = "page-btn";
+
+    next.textContent = "→";
+
+    next.disabled =
+        currentPage === pages;
+
+    next.onclick = () => {
+
+        if(currentPage < pages){
+
+            currentPage++;
+
+            renderTools();
+
+            scrollToTools();
+        }
+    };
+
+    container.appendChild(next);
+}
+
+
+/* ---------------------------------------------------------
+   ARTICLES
+--------------------------------------------------------- */
+
+function renderArticles(){
+
+    const grid =
+        document.getElementById("articlesGrid");
+
+    grid.innerHTML = "";
+
+
+    allArticles
+        .slice(0,6)
+        .forEach(article => {
+
+            const item =
+                document.createElement("article");
+
+            item.className = "article";
+
+
+            const title =
+                escapeHTML(
+                    article.title ||
+                    "Useful Online Tools Guide"
+                );
+
+
+            const content =
+                escapeHTML(
+                    article.content ||
+                    "Discover useful free online tools."
+                );
+
+
+            const category =
+                escapeHTML(
+                    article.category ||
+                    "Technology"
+                );
+
+
+            const slug =
+                article.slug ||
+                `article-${article.id}`;
+
+
+            item.innerHTML = `
+
+                <small>${category}</small>
+
+                <h3>
+                    <a href="./articles/${encodeURIComponent(slug)}.html">
+                        ${title}
+                    </a>
+                </h3>
+
+                <p>
+                    ${content.substring(0,150)}
+                    ${content.length > 150 ? "..." : ""}
+                </p>
+
+            `;
+
+
+            grid.appendChild(item);
+        });
+
+
+    if(allArticles.length === 0){
+
+        grid.innerHTML = `
+
+            <article class="article">
+
+                <small>FREE TOOLS HUB</small>
+
+                <h3>
+                    Discover our free online tools
+                </h3>
+
+                <p>
+                    Explore calculators, converters,
+                    developer tools, SEO utilities and
+                    productivity tools.
+                </p>
+
+            </article>
+
+        `;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   ICONS
+--------------------------------------------------------- */
+
+function getIcon(category){
+
+    const icons = {
+
+        Developer:"</>",
+        Designer:"✦",
+        SEO:"⌕",
+        Security:"🔒",
+        Productivity:"✓",
+        Converter:"↔",
+        Calculator:"＋",
+        Analyzer:"⌁",
+        Generator:"✦",
+        Formatter:"≡",
+        Tester:"✓",
+        Monitor:"◉",
+        Optimizer:"⚡",
+        Utility:"⚙",
+        Math:"∑"
+    };
+
+    return icons[category] || "✦";
+}
+
+
+/* ---------------------------------------------------------
+   SEARCH
+--------------------------------------------------------- */
+
+document
+    .getElementById("search")
+    .addEventListener("input", function(){
+
+        currentSearch =
+            this.value;
+
+        currentPage = 1;
+
+        applyFilters();
+    });
+
+
+/* ---------------------------------------------------------
+   HELPERS
+--------------------------------------------------------- */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function scrollToTools(){
+
+    document
+        .getElementById("tools")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+}
+
+
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
+
+loadDatabase();
+
+</script>
+
 </body>
 </html>
